@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Data
+R*_preprocessed/*.csv
+R*_preprocessed/*.parquet
+
+# Large artifacts (optional)
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
