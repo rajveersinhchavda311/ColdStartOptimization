@@ -64,7 +64,7 @@ All models implement `predict(features)`: takes 10 lag features → outputs cont
 - **Bias**: None (simple averaging, no spike-specific optimization)
 - **Purpose**: Baseline forecasting approach without ML
 
-### 4. **TCN Forecast** (Trained ML Baseline)
+### 4. **MLP Forecast** (Trained ML Baseline)
 - **Logic**: `containers(t) = trained_neural_network(lag_1, ..., lag_10)`
 - **Architecture**: MLP with layers 10 → 32 → 16 → 1
 - **Training**: Trained on training data only (no test leakage)
@@ -72,6 +72,7 @@ All models implement `predict(features)`: takes 10 lag features → outputs cont
 - **Trade-off**: Balanced cold starts and idle, computational overhead minimal
 - **Bias**: None (standard ML model without risk-awareness)
 - **Purpose**: Demonstrate ceiling of what pure forecasting can achieve
+- **Note**: This baseline represents a simple feedforward neural network using lag features. It does not capture temporal dependencies via convolution.
 
 ---
 
@@ -148,7 +149,7 @@ extreme_metrics = output['extreme_metrics']  # Spike performance
 ### Baseline Comparison
 
 ```python
-from evaluation import create_baselines, compare_models, train_tcn_scaler
+from evaluation import create_baselines, compare_models, train_mlp_scaler
 
 # Load data
 train_data = pd.read_csv('dataset/processed/azure/train.csv')
@@ -157,9 +158,9 @@ test_data = pd.read_csv('dataset/processed/azure/test.csv')
 # Create the 3 simple baselines (Reactive, Static P90, Forecast-Only)
 baselines = create_baselines(train_data)
 
-# Train the ML-based TCN baseline
-tcn_scaler = train_tcn_scaler(train_data, verbose=True)
-baselines['TCN Forecast'] = tcn_scaler
+# Train the ML-based MLP baseline
+mlp_scaler = train_mlp_scaler(train_data, verbose=True)
+baselines['MLP Forecast'] = mlp_scaler
 
 # Fair comparison on test set (all 4 baselines)
 comparison_df, detailed_results = compare_models(baselines, test_data,
@@ -183,19 +184,19 @@ python scripts/run_comparison.py
 Ranking by Total Cost (Lower is Better):
   1. Static (P90)      | Cost: 404.9M  | SLA: 86.40% | Extreme SLA: 0.00%
   2. Reactive          | Cost: 439.7M  | SLA: 54.89% | Extreme SLA: 24.39%
-  3. TCN Forecast      | Cost: 462.2M  | SLA: 49.18% | Extreme SLA: 7.32%
+  3. MLP Forecast      | Cost: 462.2M  | SLA: 49.18% | Extreme SLA: 7.32%
   4. Forecast-Only     | Cost: 517.7M  | SLA: 56.87% | Extreme SLA: 2.44%
 ```
 
 **Key Findings**:
 - **Static (P90)** minimizes cost but provides **zero resilience** to demand spikes (0% SLA at p99+)
 - **Reactive** handles spikes better (24.39% extreme SLA) at modest cost increase (+8.6%)
-- **TCN Forecast** (neural network) falls between Reactive and Static on cost (+14.1%), with moderate extreme-event resilience (7.32% SLA at p99+)
+- **MLP Forecast** (neural network) falls between Reactive and Static on cost (+14.1%), with moderate extreme-event resilience (7.32% SLA at p99+)
 - **Forecast-Only** (neutral averaging) is most expensive (+27.8%), but shows pure forecasting approach without risk-awareness
 
 **Research Motivation**: 
 - Cost-optimal static provisioning is brittle under spikes
-- Standard ML forecasting alone (TCN without risk-awareness) cannot achieve both low cost AND high extreme-event SLA
+- Standard ML forecasting alone (MLP-based forecaster without risk-awareness) cannot achieve both low cost AND high extreme-event SLA
 - This motivates advanced prediction strategies that explicitly model extremes (Phase 2)
 
 ---
@@ -204,7 +205,7 @@ Ranking by Total Cost (Lower is Better):
 
 **Comprehensive baseline set**: Four baselines covering the design space:
 - **Reactive** & **Static**: Simple heuristics (domain knowledge)
-- **Forecast-Only** & **TCN**: Forecasting approaches (simple + ML)
+- **Forecast-Only** & **MLP Forecast**: Forecasting approaches (simple + ML)
 - None explicitly optimize for extreme events (fair comparison point)
 - All use only valid historical information (no lookahead)
 
@@ -218,7 +219,7 @@ Ranking by Total Cost (Lower is Better):
 1. **Static provisioning** (P90) minimizes cost but fails on spikes (0% extreme SLA)
 2. **Reactive provisioning** (lag_1) adapts but has inherent lag, costs +8.6%
 3. **Forecast-only** (mean of lags) represents neutral baseline forecasting
-4. **TCN Forecast** (neural network) shows strong forecasting ceiling (+14.1% cost, 7.32% extreme SLA)
+4. **MLP Forecast** (neural network) shows strong forecasting ceiling (+14.1% cost, 7.32% extreme SLA)
 5. **Key insight**: Pure forecasting is insufficient for extreme events
 6. **Phase 2 motivation**: Need risk-aware methods (EVT, CVaR) to achieve both low cost AND high extreme-event resilience
 

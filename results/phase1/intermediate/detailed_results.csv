@@ -1,0 +1,57 @@
+results_df,summary,distribution,extreme_metrics,demand_threshold,Model
+"               timestamp  ...  is_extreme
+0    2019-01-12 04:50:00  ...       False
+1    2019-01-12 04:51:00  ...       False
+2    2019-01-12 04:52:00  ...       False
+3    2019-01-12 04:53:00  ...       False
+4    2019-01-12 04:54:00  ...       False
+...                  ...  ...         ...
+4025 2019-01-14 23:55:00  ...       False
+4026 2019-01-14 23:56:00  ...       False
+4027 2019-01-14 23:57:00  ...       False
+4028 2019-01-14 23:58:00  ...       False
+4029 2019-01-14 23:59:00  ...       False
+
+[4030 rows x 7 columns]","{'total_cold': 39974213, 'total_idle': 39942535, 'total_cost': 439684665.0, 'sla_compliance': 0.5488833746898263}","{'cold_p50': 0.0, 'cold_p95': 50202.1, 'cold_p99': 105601.42000000001, 'cold_max': 165886.0, 'idle_p50': 2469.5, 'idle_p95': 38925.49999999995, 'idle_p99': 67051.5, 'idle_max': 166690.0, 'cost_mean': 109102.89454094293, 'cost_std': 195697.85748070202}","{'num_extreme_timesteps': 41, 'pct_extreme': 1.0173697270471465, 'demand_threshold': 775031.0, 'cold_mean_on_extreme': 39103.60975609756, 'cold_max_on_extreme': 128995.0, 'cold_p95_on_extreme': 111401.0, 'idle_mean_on_extreme': 4160.243902439024, 'idle_p95_on_extreme': 18904.0, 'cost_total_on_extreme': 16203050.0, 'cost_mean_on_extreme': 395196.34146341466, 'sla_on_extreme': 0.24390243902439024}",775012.73,Reactive
+"               timestamp  ...  is_extreme
+0    2019-01-12 04:50:00  ...       False
+1    2019-01-12 04:51:00  ...       False
+2    2019-01-12 04:52:00  ...       False
+3    2019-01-12 04:53:00  ...       False
+4    2019-01-12 04:54:00  ...       False
+...                  ...  ...         ...
+4025 2019-01-14 23:55:00  ...       False
+4026 2019-01-14 23:56:00  ...       False
+4027 2019-01-14 23:57:00  ...       False
+4028 2019-01-14 23:58:00  ...       False
+4029 2019-01-14 23:59:00  ...       False
+
+[4030 rows x 7 columns]","{'total_cold': 17518652, 'total_idle': 229788318, 'total_cost': 404974838.0, 'sla_compliance': 0.8640198511166253}","{'cold_p50': 0.0, 'cold_p95': 34584.94999999998, 'cold_p99': 77063.73, 'cold_max': 168394.0, 'idle_p50': 51702.5, 'idle_p95': 134825.19999999998, 'idle_p99': 165215.21, 'idle_max': 188091.0, 'cost_mean': 100490.03424317618, 'cost_std': 138559.6485911876}","{'num_extreme_timesteps': 41, 'pct_extreme': 1.0173697270471465, 'demand_threshold': 775031.0, 'cold_mean_on_extreme': 97834.39024390244, 'cold_max_on_extreme': 168394.0, 'cold_p95_on_extreme': 143966.0, 'idle_mean_on_extreme': 0.0, 'idle_p95_on_extreme': 0.0, 'cost_total_on_extreme': 40112100.0, 'cost_mean_on_extreme': 978343.9024390244, 'sla_on_extreme': 0.0}",775012.73,Static (P90)
+"               timestamp  ...  is_extreme
+0    2019-01-12 04:50:00  ...       False
+1    2019-01-12 04:51:00  ...       False
+2    2019-01-12 04:52:00  ...       False
+3    2019-01-12 04:53:00  ...       False
+4    2019-01-12 04:54:00  ...       False
+...                  ...  ...         ...
+4025 2019-01-14 23:55:00  ...       False
+4026 2019-01-14 23:56:00  ...       False
+4027 2019-01-14 23:57:00  ...       False
+4028 2019-01-14 23:58:00  ...       False
+4029 2019-01-14 23:59:00  ...       False
+
+[4030 rows x 7 columns]","{'total_cold': 47078449, 'total_idle': 46890868, 'total_cost': 517675358.0, 'sla_compliance': 0.5687344913151364}","{'cold_p50': 0.0, 'cold_p95': 62600.949999999975, 'cold_p99': 104441.38000000008, 'cold_max': 176067.0, 'idle_p50': 3936.0, 'idle_p95': 45491.75, 'idle_p99': 64958.45000000001, 'idle_max': 117790.0, 'cost_mean': 128455.42382133995, 'cost_std': 218478.83917884302}","{'num_extreme_timesteps': 41, 'pct_extreme': 1.0173697270471465, 'demand_threshold': 775031.0, 'cold_mean_on_extreme': 77820.70731707317, 'cold_max_on_extreme': 176067.0, 'cold_p95_on_extreme': 151482.0, 'idle_mean_on_extreme': 313.7073170731707, 'idle_p95_on_extreme': 0.0, 'cost_total_on_extreme': 31919352.0, 'cost_mean_on_extreme': 778520.7804878049, 'sla_on_extreme': 0.024390243902439025}",775012.73,Forecast-Only
+"               timestamp  ...  is_extreme
+0    2019-01-12 04:50:00  ...       False
+1    2019-01-12 04:51:00  ...       False
+2    2019-01-12 04:52:00  ...       False
+3    2019-01-12 04:53:00  ...       False
+4    2019-01-12 04:54:00  ...       False
+...                  ...  ...         ...
+4025 2019-01-14 23:55:00  ...       False
+4026 2019-01-14 23:56:00  ...       False
+4027 2019-01-14 23:57:00  ...       False
+4028 2019-01-14 23:58:00  ...       False
+4029 2019-01-14 23:59:00  ...       False
+
+[4030 rows x 7 columns]","{'total_cold': 43387885, 'total_idle': 28330910, 'total_cost': 462209760.0, 'sla_compliance': 0.49181141439205955}","{'cold_p50': 385.0, 'cold_p95': 49756.54999999994, 'cold_p99': 103048.24000000002, 'cold_max': 158659.0, 'idle_p50': 0.0, 'idle_p95': 28616.749999999993, 'idle_p99': 48302.49, 'idle_max': 113225.0, 'cost_mean': 114692.24813895782, 'cost_std': 198545.53495384048}","{'num_extreme_timesteps': 41, 'pct_extreme': 1.0173697270471465, 'demand_threshold': 775031.0, 'cold_mean_on_extreme': 57078.65853658537, 'cold_max_on_extreme': 124144.0, 'cold_p95_on_extreme': 123163.0, 'idle_mean_on_extreme': 660.0243902439024, 'idle_p95_on_extreme': 6285.0, 'cost_total_on_extreme': 23429311.0, 'cost_mean_on_extreme': 571446.6097560975, 'sla_on_extreme': 0.07317073170731707}",775012.73,MLP Forecast

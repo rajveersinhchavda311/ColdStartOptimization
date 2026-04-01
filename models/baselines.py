@@ -9,7 +9,7 @@ Four baselines represent the design space:
     - ReactiveScaler: Respond to most recent demand (reactive)
     - StaticScaler: Fixed provisioning for P90 demand (static capacity planning)
     - ForecastOnlyScaler: Simple heuristic forecast from lag values (naive predictive)
-    - TCNForecastScaler: Trained ML model for demand forecasting (strong baseline)
+    - MLPForecastScaler: Trained ML model for demand forecasting (strong baseline)
 """
 
 import numpy as np
@@ -109,7 +109,7 @@ class ForecastOnlyScaler:
         return np.mean(features)
 
 
-class TCNForecastScaler:
+class MLPForecastScaler:
     """
     ML-based forecasting baseline: Trained neural network (no risk-awareness).
     
@@ -129,7 +129,8 @@ class TCNForecastScaler:
         Initialize with trained model.
         
         param model: Fitted ML model with predict() method.
-                    Usually trained via train_tcn_scaler(train_data).
+                    Usually trained via train_mlp_scaler(train_data).
+                    This model is a feedforward MLP, not a Temporal Convolutional Network.
         """
         self.model = model
     
@@ -141,8 +142,8 @@ class TCNForecastScaler:
         OUTPUT: predicted container count from trained model
         """
         if self.model is None:
-            raise ValueError("TCNForecastScaler requires a trained model. "
-                           "Use train_tcn_scaler(train_data) to create one.")
+            raise ValueError("MLPForecastScaler requires a trained model. "
+                           "Use train_mlp_scaler(train_data) to create one.")
         
         # Ensure features are in correct shape for model
         features_2d = np.array(features).reshape(1, -1)
@@ -151,7 +152,7 @@ class TCNForecastScaler:
         return max(0, prediction)  # Ensure non-negative
 
 
-def train_tcn_scaler(train_data, random_state=42, verbose=False):
+def train_mlp_scaler(train_data, random_state=42, verbose=False):
     """
     Train a neural network forecaster on training data.
     
@@ -175,12 +176,12 @@ def train_tcn_scaler(train_data, random_state=42, verbose=False):
     
     OUTPUT:
     -------
-    scaler : TCNForecastScaler
+    scaler : MLPForecastScaler
         Trained model ready for evaluation (implements predict(features))
     
     Example:
-        tcn_scaler = train_tcn_scaler(train_data)
-        tcn_scaler.predict(features)  # Returns predicted demand
+        mlp_scaler = train_mlp_scaler(train_data)
+        mlp_scaler.predict(features)  # Returns predicted demand
     """
     
     # Extract features and targets from training data
@@ -214,11 +215,11 @@ def train_tcn_scaler(train_data, random_state=42, verbose=False):
         # Report training performance
         train_mse = np.mean((model.predict(X_train) - y_train) ** 2)
         train_mae = np.mean(np.abs(model.predict(X_train) - y_train))
-        print(f"  TCN Forecast Training:")
+        print(f"  MLP Forecast Training:")
         print(f"    MSE: {train_mse:,.0f}")
         print(f"    MAE: {train_mae:,.0f}")
     
-    return TCNForecastScaler(model=model)
+    return MLPForecastScaler(model=model)
 
 
 def create_baselines(train_data):

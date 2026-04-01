@@ -30,7 +30,7 @@
 | **Reactive** | Heuristic | None | None | ✅ Tested |
 | **Static (P90)** | Heuristic | P90(train) | None | ✅ Tested |
 | **Forecast-Only** | Heuristic | None (deterministic) | None | ✅ Tested |
-| **TCN Forecast** | ML (Neural Net) | MLP (32-16 layers) | None | ✅ Tested |
+| **MLP Forecast** | ML (Neural Net) | MLP (32-16 layers) | None | ✅ Tested |
 
 All baselines:
 - Implement `predict(features)` interface (10 lags → 1 prediction)
@@ -77,7 +77,7 @@ All code is **publication-ready** with:
 |------|-------|-----------|-----|-------------|------------|
 | 1 | **Static (P90)** | 404.9M | 86.40% | 0.00% | +0.0% |
 | 2 | **Reactive** | 439.7M | 54.89% | 24.39% | +8.6% |
-| 3 | **TCN Forecast** | 462.2M | 49.18% | 7.32% | +14.1% |
+| 3 | **MLP Forecast** | 462.2M | 49.18% | 7.32% | +14.1% |
 | 4 | **Forecast-Only** | 517.7M | 56.87% | 2.44% | +27.8% |
 
 ### Key Insights
@@ -92,7 +92,7 @@ All code is **publication-ready** with:
 - Good extreme event handling (24.39% extreme SLA)
 - Trade-off: Responsiveness comes at cost
 
-**TCN Forecast**: Strong ML baseline
+**MLP Forecast**: Strong ML baseline
 - Balanced cost (+14.1%)
 - Moderate extreme event handling (7.32% extreme SLA)
 - **Key finding**: Pure ML forecasting is insufficient
@@ -109,7 +109,7 @@ All code is **publication-ready** with:
    - Lowest cost (Static) has worst resilience
    - Best resilience (Reactive) costs 8.6% more
 
-2. **ML Forecasting Ceiling**: TCN (+14.1% cost, 7.32% extreme SLA)
+2. **ML Forecasting Ceiling**: MLP (+14.1% cost, 7.32% extreme SLA)
    - Shows what standard forecasting can achieve
    - Cannot simultaneously minimize cost AND handle spikes
    - **Motivates Phase 2**: Need risk-aware methods
@@ -130,7 +130,7 @@ All code is **publication-ready** with:
 - ✅ All NaN values checked and handled
 
 ### Model Training ✅
-- ✅ TCN trained ONLY on training data
+- ✅ MLP trained ONLY on training data
 - ✅ Test data never seen during training
 - ✅ Fixed random seed (42) for reproducibility
 - ✅ No hyperparameter tuning
@@ -184,8 +184,8 @@ All code is **publication-ready** with:
 - `ReactiveScaler.predict()` correctly returns lag_1
 - `StaticScaler.predict()` correctly returns P90 capacity
 - `ForecastOnlyScaler.predict()` correctly averages 10 lags
-- `TCNForecastScaler.predict()` correctly uses trained model
-- `train_tcn_scaler()` correctly fits MLP to training data only
+- `MLPForecastScaler.predict()` correctly uses trained model
+- `train_mlp_scaler()` correctly fits MLP to training data only
 
 ### Integration Tests Passed ✅
 - `evaluate_model()` produces correct per-timestep metrics
@@ -199,7 +199,7 @@ All code is **publication-ready** with:
 - `python scripts/run_comparison.py`
   - Loads Azure train/test data (12090 + 4030 samples)
   - Creates 3 simple baselines
-  - Trains TCN baseline (81 iterations, converged)
+  - Trains MLP baseline (81 iterations, converged)
   - Evaluates all 4 baselines on test set
   - Produces expected ranking and metrics
   - No errors, clean shutdown
@@ -214,7 +214,7 @@ All code is **publication-ready** with:
 |-------|-----------|------------|------|-----|------------|
 | Static (P90) | 404.9M | 17.5M | 229.8M | 86.40% | 0.00% |
 | Reactive | 439.7M | 40.0M | 39.9M | 54.89% | 24.39% |
-| TCN Forecast | 462.2M | 43.4M | 28.3M | 49.18% | 7.32% |
+| MLP Forecast | 462.2M | 43.4M | 28.3M | 49.18% | 7.32% |
 | Forecast-Only | 517.7M | 47.1M | 46.9M | 56.87% | 2.44% |
 
 ### Figure 1: Cost vs Extreme-Event SLA Trade-off
@@ -272,7 +272,7 @@ All code is **publication-ready** with:
 ✅ Paper-ready results and documentation  
 
 **The baseline set clearly motivates Phase 2:**
-- Pure forecasting insufficient (TCN +14.1% cost, 7.32% extreme SLA)
+- Pure forecasting insufficient (MLP +14.1% cost, 7.32% extreme SLA)
 - Cost-optimal static fails catastrophically (0% extreme SLA)
 - Trade-off space is clear and well-measured
 - Need for risk-aware methods is evident

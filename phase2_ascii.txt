@@ -1,0 +1,450 @@
+
+
+==========================================================================================
+
+  PHASE 2: RISK-AWARE AUTOSCALING (EVT + CVaR)
+
+==========================================================================================
+
+
+
+==========================================================================================
+
+  DATASET: Azure Functions
+
+==========================================================================================
+
+
+
+[SETUP] Loading Azure Functions data...
+
+  Train: 12,090 samples
+
+  Test:  4,030 samples
+
+
+
+[BASELINES] Creating Phase 1 models...
+
+  Created: Reactive, Static (P90), Forecast-Only
+
+  Training MLP baseline... done
+
+
+
+[RISK-AWARE] Training EVT+CVaR model...
+
+
+
+  --- Quantile Forecaster ---
+
+  Training quantile model (tau=0.5)... done (train MAE: 16,003)
+
+  Training quantile model (tau=0.9)... done (train MAE: 30,787)
+
+  Training quantile model (tau=0.99)... done (train MAE: 94,144)
+
+  Quantile ordering violations on train: 37 (0.2%)
+
+
+
+  --- EVT Tail Model ---
+
+
+
+  EVT Model (GPD) fitted:
+
+    Threshold (P99): 779,904
+
+    Exceedances: 121
+
+    Shape (xi):  -0.1988
+
+    Scale (sigma): 29,287.86
+
+    Expected excess above threshold: 24,432
+
+
+
+======================================================================
+
+COMPONENT SANITY CHECKS
+
+======================================================================
+
+
+
+[1] Quantile predictions (5 random test points):
+
+    t= 657: actual=   662,157  q50=   652,213  q90=   674,984  q99=   760,778  OK
+
+    t= 670: actual=   749,034  q50=   636,607  q90=   663,246  q99=   736,518  OK
+
+    t=1138: actual=   618,972  q50=   613,533  q90=   636,518  q99=   704,209  OK
+
+    t=1988: actual=   655,673  q50=   645,931  q90=   675,186  q99=   734,189  OK
+
+    t=3149: actual=   663,260  q50=   668,399  q90=   706,898  q99=   761,025  OK
+
+
+
+[2] EVT params: threshold=779,904, shape=-0.1988, scale=29,287.86
+
+
+
+[3] Scenario generation (one test point):
+
+    q50=558,023, q90=576,048, q99=637,971
+
+    Scenarios: min=512,183, mean=581,253, max=836,946, std=75,172
+
+
+
+[4] CVaR optimization (one test point):
+
+    c*=807,656 (actual demand=588,657, q90=576,048, q99=637,971)
+
+    c* vs q90: +231,608
+
+
+
+[EVAL] Running fair comparison (5 models)...
+
+  Cost params: C_cold=10.0, C_idle=1.0
+
+
+
+======================================================================
+
+Evaluating Reactive             on Azure Functions
+
+======================================================================
+
+
+
+[1/4] Running simulation (4030 timesteps)...
+
+      ??? Computed metrics for 4030 timesteps
+
+
+
+[2/4] Summary Metrics:
+
+      Total Cold Starts: 39,974,213
+
+      Total Idle:        39,942,535
+
+      Total Cost:        439,684,665.00
+
+      SLA Compliance:    54.89%
+
+
+
+      Cold Start Distribution:
+
+        P50: 0.0, P95: 50202.1, P99: 105601.4, Max: 165886.0
+
+
+
+[3/4] Extreme Event Analysis (p99)...
+
+      Demand Threshold: 775012.7
+
+      Extreme Timesteps: 41 (1.0%)
+
+      SLA on Extreme: 24.39%
+
+      Avg Cold Starts on Extreme: 39103.6
+
+
+
+[4/4] Finalizing results...
+
+      ??? Ready for analysis and comparison
+
+======================================================================
+
+
+
+
+
+======================================================================
+
+Evaluating Static (P90)         on Azure Functions
+
+======================================================================
+
+
+
+[1/4] Running simulation (4030 timesteps)...
+
+      ??? Computed metrics for 4030 timesteps
+
+
+
+[2/4] Summary Metrics:
+
+      Total Cold Starts: 17,518,652
+
+      Total Idle:        229,788,318
+
+      Total Cost:        404,974,838.00
+
+      SLA Compliance:    86.40%
+
+
+
+      Cold Start Distribution:
+
+        P50: 0.0, P95: 34584.9, P99: 77063.7, Max: 168394.0
+
+
+
+[3/4] Extreme Event Analysis (p99)...
+
+      Demand Threshold: 775012.7
+
+      Extreme Timesteps: 41 (1.0%)
+
+      SLA on Extreme: 0.00%
+
+      Avg Cold Starts on Extreme: 97834.4
+
+
+
+[4/4] Finalizing results...
+
+      ??? Ready for analysis and comparison
+
+======================================================================
+
+
+
+
+
+======================================================================
+
+Evaluating Forecast-Only        on Azure Functions
+
+======================================================================
+
+
+
+[1/4] Running simulation (4030 timesteps)...
+
+      ??? Computed metrics for 4030 timesteps
+
+
+
+[2/4] Summary Metrics:
+
+      Total Cold Starts: 47,078,449
+
+      Total Idle:        46,890,868
+
+      Total Cost:        517,675,358.00
+
+      SLA Compliance:    56.87%
+
+
+
+      Cold Start Distribution:
+
+        P50: 0.0, P95: 62600.9, P99: 104441.4, Max: 176067.0
+
+
+
+[3/4] Extreme Event Analysis (p99)...
+
+      Demand Threshold: 775012.7
+
+      Extreme Timesteps: 41 (1.0%)
+
+      SLA on Extreme: 2.44%
+
+      Avg Cold Starts on Extreme: 77820.7
+
+
+
+[4/4] Finalizing results...
+
+      ??? Ready for analysis and comparison
+
+======================================================================
+
+
+
+
+
+======================================================================
+
+Evaluating MLP Forecast         on Azure Functions
+
+======================================================================
+
+
+
+[1/4] Running simulation (4030 timesteps)...
+
+      ??? Computed metrics for 4030 timesteps
+
+
+
+[2/4] Summary Metrics:
+
+      Total Cold Starts: 43,387,885
+
+      Total Idle:        28,330,910
+
+      Total Cost:        462,209,760.00
+
+      SLA Compliance:    49.18%
+
+
+
+      Cold Start Distribution:
+
+        P50: 385.0, P95: 49756.5, P99: 103048.2, Max: 158659.0
+
+
+
+[3/4] Extreme Event Analysis (p99)...
+
+      Demand Threshold: 775012.7
+
+      Extreme Timesteps: 41 (1.0%)
+
+      SLA on Extreme: 7.32%
+
+      Avg Cold Starts on Extreme: 57078.7
+
+
+
+[4/4] Finalizing results...
+
+      ??? Ready for analysis and comparison
+
+======================================================================
+
+
+
+
+
+======================================================================
+
+Evaluating EVT+CVaR (Ours)      on Azure Functions
+
+======================================================================
+
+
+
+[1/4] Running simulation (4030 timesteps)...
+
+      ??? Computed metrics for 4030 timesteps
+
+
+
+[2/4] Summary Metrics:
+
+      Total Cold Starts: 37,549
+
+      Total Idle:        717,210,492
+
+      Total Cost:        717,585,982.00
+
+      SLA Compliance:    99.95%
+
+
+
+      Cold Start Distribution:
+
+        P50: 0.0, P95: 0.0, P99: 0.0, Max: 30553.0
+
+
+
+[3/4] Extreme Event Analysis (p99)...
+
+      Demand Threshold: 775012.7
+
+      Extreme Timesteps: 41 (1.0%)
+
+      SLA on Extreme: 95.12%
+
+      Avg Cold Starts on Extreme: 915.8
+
+
+
+[4/4] Finalizing results...
+
+      ??? Ready for analysis and comparison
+
+======================================================================
+
+
+
+
+
+==========================================================================================
+
+  RESULTS: Azure Functions
+
+==========================================================================================
+
+
+
+                 Total Cold  Total Idle   Total Cost  SLA Compliance  SLA on Extreme  Cold Mean (Extreme)  Avg Cost (Extreme)
+
+Model                                                                                                                        
+
+Reactive           39974213    39942535  439684665.0        0.548883        0.243902         39103.609756       395196.341463
+
+Static (P90)       17518652   229788318  404974838.0        0.864020        0.000000         97834.390244       978343.902439
+
+Forecast-Only      47078449    46890868  517675358.0        0.568734        0.024390         77820.707317       778520.780488
+
+MLP Forecast       43387885    28330910  462209760.0        0.491811        0.073171         57078.658537       571446.609756
+
+EVT+CVaR (Ours)       37549   717210492  717585982.0        0.999504        0.951220           915.829268        50291.000000
+
+
+
+
+
+RANKING BY TOTAL COST:
+
+  1. Static (P90)              | Cost:   404,974,838 | Extreme SLA:   0.0%
+
+  2. Reactive                  | Cost:   439,684,665 | Extreme SLA:  24.4%
+
+  3. MLP Forecast              | Cost:   462,209,760 | Extreme SLA:   7.3%
+
+  4. Forecast-Only             | Cost:   517,675,358 | Extreme SLA:   2.4%
+
+  5. EVT+CVaR (Ours)           | Cost:   717,585,982 | Extreme SLA:  95.1% << OURS
+
+
+
+
+
+EXTREME EVENT COMPARISON:
+
+  Reactive                  | Overall SLA:  54.9% | Extreme SLA:  24.4% | Avg Cold (extreme):     39,104
+
+  Static (P90)              | Overall SLA:  86.4% | Extreme SLA:   0.0% | Avg Cold (extreme):     97,834
+
+  Forecast-Only             | Overall SLA:  56.9% | Extreme SLA:   2.4% | Avg Cold (extreme):     77,821
+
+  MLP Forecast              | Overall SLA:  49.2% | Extreme SLA:   7.3% | Avg Cold (extreme):     57,079
+
+  EVT+CVaR (Ours)           | Overall SLA: 100.0% | Extreme SLA:  95.1% | Avg Cold (extreme):        916
+
+
+
+==========================================================================================
+
+  [OK] PHASE 2 EVALUATION COMPLETE
+
+==========================================================================================
+
+
+

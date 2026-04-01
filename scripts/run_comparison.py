@@ -18,7 +18,7 @@ import pandas as pd
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from evaluation import create_baselines, compare_models, print_comparison, train_tcn_scaler
+from evaluation import create_baselines, compare_models, print_comparison, train_mlp_scaler
 from evaluation.config import COST_COLD, COST_IDLE
 
 
@@ -70,11 +70,11 @@ def main():
     for name in baselines.keys():
         print(f"    - {name}")
     
-    # Train TCN forecasting baseline
-    print("\n[SETUP] Training TCN forecasting baseline...")
-    tcn_scaler = train_tcn_scaler(train_data, verbose=True)
-    baselines['TCN Forecast'] = tcn_scaler
-    print(f"  [OK] Added TCN Forecast to baselines (total: {len(baselines)})")
+    # Train MLP forecasting baseline
+    print("\n[SETUP] Training MLP forecasting baseline...")
+    mlp_scaler = train_mlp_scaler(train_data, verbose=True)
+    baselines['MLP Forecast'] = mlp_scaler
+    print(f"  [OK] Added MLP Forecast to baselines (total: {len(baselines)})")
     
     # ====================================================================
     # Run comparison on test set
