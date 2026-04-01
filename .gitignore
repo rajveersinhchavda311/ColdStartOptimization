@@ -1,2 +1,3 @@
 ﻿dataset/raw/
-*.csv
+!dataset/processed/
+!dataset/processed/*.csv
