@@ -1,0 +1,328 @@
+{
+  "total_checks": 64,
+  "passed": 63,
+  "failed": 1,
+  "overall": "FAIL",
+  "checks": [
+    {
+      "name": "All models evaluated on identical test data",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Test data is chronologically after training data",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Reactive)] predicted == base_prediction + buffer",
+      "status": "PASS",
+      "detail": "max diff: 0.000000"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] predicted == base_prediction + buffer",
+      "status": "PASS",
+      "detail": "max diff: 0.000000"
+    },
+    {
+      "name": "[RiskAware(TCN)] predicted == base_prediction + buffer",
+      "status": "PASS",
+      "detail": "max diff: 0.000000"
+    },
+    {
+      "name": "[RiskAware(Reactive)] sigma_t has multiple distinct values",
+      "status": "PASS",
+      "detail": "unique values: 4001"
+    },
+    {
+      "name": "[RiskAware(Reactive)] First 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] sigma_t has multiple distinct values",
+      "status": "PASS",
+      "detail": "unique values: 4001"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] First 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(TCN)] sigma_t has multiple distinct values",
+      "status": "PASS",
+      "detail": "unique values: 4001"
+    },
+    {
+      "name": "[RiskAware(TCN)] First 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Reactive)] sigma_train > 0",
+      "status": "PASS",
+      "detail": "sigma_train = 29707.4284"
+    },
+    {
+      "name": "[RiskAware(Reactive)] sigma_train is finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] sigma_train > 0",
+      "status": "PASS",
+      "detail": "sigma_train = 33976.1098"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] sigma_train is finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(TCN)] sigma_train > 0",
+      "status": "PASS",
+      "detail": "sigma_train = 30561.3050"
+    },
+    {
+      "name": "[RiskAware(TCN)] sigma_train is finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Reactive)] xi < 1 (finite CVaR)",
+      "status": "PASS",
+      "detail": "xi = -0.122828"
+    },
+    {
+      "name": "[RiskAware(Reactive)] beta > 0 (valid scale)",
+      "status": "PASS",
+      "detail": "beta = 1.147512"
+    },
+    {
+      "name": "[RiskAware(Reactive)] CVaR_z > 0 (positive buffer multiplier)",
+      "status": "PASS",
+      "detail": "CVaR_z = 4.119076"
+    },
+    {
+      "name": "[RiskAware(Reactive)] CVaR_z > VaR (CVaR >= VaR by definition)",
+      "status": "PASS",
+      "detail": "CVaR=4.1191, VaR=3.3488"
+    },
+    {
+      "name": "[RiskAware(Reactive)] CVaR_z is finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] xi < 1 (finite CVaR)",
+      "status": "PASS",
+      "detail": "xi = -0.260815"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] beta > 0 (valid scale)",
+      "status": "PASS",
+      "detail": "beta = 1.194269"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] CVaR_z > 0 (positive buffer multiplier)",
+      "status": "PASS",
+      "detail": "CVaR_z = 3.804094"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] CVaR_z > VaR (CVaR >= VaR by definition)",
+      "status": "PASS",
+      "detail": "CVaR=3.8041, VaR=3.2845"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] CVaR_z is finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(TCN)] xi < 1 (finite CVaR)",
+      "status": "PASS",
+      "detail": "xi = -0.315681"
+    },
+    {
+      "name": "[RiskAware(TCN)] beta > 0 (valid scale)",
+      "status": "PASS",
+      "detail": "beta = 1.423098"
+    },
+    {
+      "name": "[RiskAware(TCN)] CVaR_z > 0 (positive buffer multiplier)",
+      "status": "PASS",
+      "detail": "CVaR_z = 4.381571"
+    },
+    {
+      "name": "[RiskAware(TCN)] CVaR_z > VaR (CVaR >= VaR by definition)",
+      "status": "PASS",
+      "detail": "CVaR=4.3816, VaR=3.8587"
+    },
+    {
+      "name": "[RiskAware(TCN)] CVaR_z is finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Reactive)] std(buffer_t) > 0",
+      "status": "PASS",
+      "detail": "std = 24519.6276"
+    },
+    {
+      "name": "[RiskAware(Reactive)] range(buffer_t) > 0",
+      "status": "PASS",
+      "detail": "range = 142263.4581"
+    },
+    {
+      "name": "[RiskAware(Reactive)] CV(buffer_t) > 0.01 (non-trivial variation)",
+      "status": "PASS",
+      "detail": "CV = 0.2120"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] std(buffer_t) > 0",
+      "status": "PASS",
+      "detail": "std = 34736.1475"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] range(buffer_t) > 0",
+      "status": "PASS",
+      "detail": "range = 228537.2507"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] CV(buffer_t) > 0.01 (non-trivial variation)",
+      "status": "PASS",
+      "detail": "CV = 0.3047"
+    },
+    {
+      "name": "[RiskAware(TCN)] std(buffer_t) > 0",
+      "status": "PASS",
+      "detail": "std = 32811.0759"
+    },
+    {
+      "name": "[RiskAware(TCN)] range(buffer_t) > 0",
+      "status": "PASS",
+      "detail": "range = 200273.5237"
+    },
+    {
+      "name": "[RiskAware(TCN)] CV(buffer_t) > 0.01 (non-trivial variation)",
+      "status": "PASS",
+      "detail": "CV = 0.2783"
+    },
+    {
+      "name": "[RiskAware(Reactive)] corr(sigma_t, buffer_t) > 0.99",
+      "status": "PASS",
+      "detail": "correlation = 1.000000"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] corr(sigma_t, buffer_t) > 0.99",
+      "status": "PASS",
+      "detail": "correlation = 1.000000"
+    },
+    {
+      "name": "[RiskAware(TCN)] corr(sigma_t, buffer_t) > 0.99",
+      "status": "PASS",
+      "detail": "correlation = 1.000000"
+    },
+    {
+      "name": "[RiskAware(Reactive)] mean(buffer|extreme) > mean(buffer|normal)",
+      "status": "PASS",
+      "detail": "extreme=118,856.84, normal=115,616.43, ratio=1.03x"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] mean(buffer|extreme) > mean(buffer|normal)",
+      "status": "FAIL",
+      "detail": "extreme=108,226.87, normal=114,059.53, ratio=0.95x"
+    },
+    {
+      "name": "[RiskAware(TCN)] mean(buffer|extreme) > mean(buffer|normal)",
+      "status": "PASS",
+      "detail": "extreme=118,520.37, normal=117,904.84, ratio=1.01x"
+    },
+    {
+      "name": "[RiskAware(Reactive)] Same test demands as Phase 1 Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Reactive)] Same extreme flags as Phase 1 Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] Same test demands as Phase 1 Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] Same extreme flags as Phase 1 Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(TCN)] Same test demands as Phase 1 TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(TCN)] Same extreme flags as Phase 1 TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Reactive)] served + cold_starts == demand",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Reactive)] No negative cold starts or idle capacity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Reactive)] No timestep has both cold starts AND idle",
+      "status": "PASS",
+      "detail": "0 timesteps violate"
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] served + cold_starts == demand",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] No negative cold starts or idle capacity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] No timestep has both cold starts AND idle",
+      "status": "PASS",
+      "detail": "0 timesteps violate"
+    },
+    {
+      "name": "[RiskAware(TCN)] served + cold_starts == demand",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(TCN)] No negative cold starts or idle capacity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(TCN)] No timestep has both cold starts AND idle",
+      "status": "PASS",
+      "detail": "0 timesteps violate"
+    },
+    {
+      "name": "[RiskAware(Reactive)] Reproducible: two runs identical",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Forecast_Only)] Reproducible: two runs identical",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

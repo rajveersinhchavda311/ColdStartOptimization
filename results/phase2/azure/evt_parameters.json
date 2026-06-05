@@ -1,0 +1,38 @@
+{
+  "RiskAware(Reactive)": {
+    "threshold_u": 1.0480207025380137,
+    "threshold_percentile": 90,
+    "n_total": 12090,
+    "n_exceedances": 1208,
+    "exceedance_prob": 0.0999172870140612,
+    "xi": -0.12282806037433391,
+    "beta": 1.1475119693281113,
+    "var": 3.3487752466155745,
+    "cvar_z": 4.1190755105698615,
+    "alpha": 0.99
+  },
+  "RiskAware(Forecast_Only)": {
+    "threshold_u": 1.2171684821579674,
+    "threshold_percentile": 90,
+    "n_total": 12090,
+    "n_exceedances": 1209,
+    "exceedance_prob": 0.1,
+    "xi": -0.26081485925356546,
+    "beta": 1.1942686798529665,
+    "var": 3.2845333412697126,
+    "cvar_z": 3.804093529103941,
+    "alpha": 0.99
+  },
+  "RiskAware(TCN)": {
+    "threshold_u": 1.5299076713457453,
+    "threshold_percentile": 90,
+    "n_total": 12090,
+    "n_exceedances": 1209,
+    "exceedance_prob": 0.1,
+    "xi": -0.31568145311961215,
+    "beta": 1.4230976986053148,
+    "var": 3.8586900962044646,
+    "cvar_z": 4.381570674246601,
+    "alpha": 0.99
+  }
+}
