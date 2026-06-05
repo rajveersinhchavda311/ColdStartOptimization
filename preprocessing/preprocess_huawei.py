@@ -311,7 +311,9 @@ def plot_region_decomposition(combined_df: pd.DataFrame, region_dfs: dict,
     plt.xticks(rotation=45)
     plt.tight_layout()
 
-    path = os.path.join(out_dir, "region_decomposition.png")
+    graphs_dir = os.path.join(BASE_DIR, "..", "graphs", "preprocessing", "huawei")
+    os.makedirs(graphs_dir, exist_ok=True)
+    path = os.path.join(graphs_dir, "region_decomposition.png")
     plt.savefig(path, dpi=150)
     plt.close()
     print(f"\n  ✓ Saved region decomposition plot: {path}")

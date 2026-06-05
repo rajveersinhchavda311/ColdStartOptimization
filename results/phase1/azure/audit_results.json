@@ -1,0 +1,263 @@
+{
+  "total": 51,
+  "passed": 51,
+  "failed": 0,
+  "overall": "PASS",
+  "checks": [
+    {
+      "name": "All models evaluated on identical test data",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Test data is chronologically after training data",
+      "status": "PASS",
+      "detail": "train_max=2019-01-09 09:39:00, test_min=2019-01-12 04:50:00"
+    },
+    {
+      "name": "Reactive predictions == lag_1 (no leakage from concurrency)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Static P90 predictions are constant (single train-derived value)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Static P90 value matches np.percentile(train, 90)",
+      "status": "PASS",
+      "detail": "predicted=697949.2, expected=697949.2"
+    },
+    {
+      "name": "[Reactive] Request SLA = 1 - (total_cold / total_demand)",
+      "status": "PASS",
+      "detail": "stored=0.9846280507, recomputed=0.9846280507"
+    },
+    {
+      "name": "[Reactive] Extreme SLA = 1 - (cold_extreme / demand_extreme)",
+      "status": "PASS",
+      "detail": "stored=0.9484043734, recomputed=0.9484043734"
+    },
+    {
+      "name": "[Reactive] total_cost == cold_cost + idle_cost",
+      "status": "PASS",
+      "detail": "stored=439684665.0, recomputed=439684665.0"
+    },
+    {
+      "name": "[Reactive] cold_starts = max(0, demand - provisioned) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Reactive] idle = max(0, provisioned - demand) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Reactive] No timestep has both cold starts AND idle",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
+      "name": "[Static_P90] Request SLA = 1 - (total_cold / total_demand)",
+      "status": "PASS",
+      "detail": "stored=0.9932634720, recomputed=0.9932634720"
+    },
+    {
+      "name": "[Static_P90] Extreme SLA = 1 - (cold_extreme / demand_extreme)",
+      "status": "PASS",
+      "detail": "stored=0.8728617044, recomputed=0.8728617044"
+    },
+    {
+      "name": "[Static_P90] total_cost == cold_cost + idle_cost",
+      "status": "PASS",
+      "detail": "stored=404972840.0, recomputed=404972840.0"
+    },
+    {
+      "name": "[Static_P90] cold_starts = max(0, demand - provisioned) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Static_P90] idle = max(0, provisioned - demand) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Static_P90] No timestep has both cold starts AND idle",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
+      "name": "[Forecast_Only] Request SLA = 1 - (total_cold / total_demand)",
+      "status": "PASS",
+      "detail": "stored=0.9818964529, recomputed=0.9818964529"
+    },
+    {
+      "name": "[Forecast_Only] Extreme SLA = 1 - (cold_extreme / demand_extreme)",
+      "status": "PASS",
+      "detail": "stored=0.8996129774, recomputed=0.8996129774"
+    },
+    {
+      "name": "[Forecast_Only] total_cost == cold_cost + idle_cost",
+      "status": "PASS",
+      "detail": "stored=517668261.0, recomputed=517668261.0"
+    },
+    {
+      "name": "[Forecast_Only] cold_starts = max(0, demand - provisioned) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Forecast_Only] idle = max(0, provisioned - demand) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Forecast_Only] No timestep has both cold starts AND idle",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
+      "name": "[TCN] Request SLA = 1 - (total_cold / total_demand)",
+      "status": "PASS",
+      "detail": "stored=0.9739530111, recomputed=0.9739530111"
+    },
+    {
+      "name": "[TCN] Extreme SLA = 1 - (cold_extreme / demand_extreme)",
+      "status": "PASS",
+      "detail": "stored=0.8803649833, recomputed=0.8803649833"
+    },
+    {
+      "name": "[TCN] total_cost == cold_cost + idle_cost",
+      "status": "PASS",
+      "detail": "stored=695325761.0, recomputed=695325761.0"
+    },
+    {
+      "name": "[TCN] cold_starts = max(0, demand - provisioned) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[TCN] idle = max(0, provisioned - demand) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[TCN] No timestep has both cold starts AND idle",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
+      "name": "Reactive: prediction == lag_1 exactly",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Static P90: all predictions == P90(train)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Forecast Only: prediction == mean(lag_1..lag_10)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "TCN: predictions are NOT constant (learned model)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "TCN: predictions differ from Reactive (not trivial)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Extreme threshold computed from train P99",
+      "status": "PASS",
+      "detail": "threshold=779,904"
+    },
+    {
+      "name": "[Reactive] is_extreme flag matches train-derived threshold",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Static_P90] is_extreme flag matches train-derived threshold",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Forecast_Only] is_extreme flag matches train-derived threshold",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[TCN] is_extreme flag matches train-derived threshold",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Extreme threshold != P99(test) (no test leakage)",
+      "status": "PASS",
+      "detail": "train_threshold=779904, test_p99=775013"
+    },
+    {
+      "name": "[Reactive] Reproducible: two runs produce identical predictions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Static_P90] Reproducible: two runs produce identical predictions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Forecast_Only] Reproducible: two runs produce identical predictions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Reactive] served + cold_starts == demand at every timestep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Reactive] No negative cold starts or idle capacity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Static_P90] served + cold_starts == demand at every timestep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Static_P90] No negative cold starts or idle capacity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Forecast_Only] served + cold_starts == demand at every timestep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Forecast_Only] No negative cold starts or idle capacity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[TCN] served + cold_starts == demand at every timestep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[TCN] No negative cold starts or idle capacity",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}
