@@ -1,0 +1,27 @@
+{
+  "total_cost": 350419070.0,
+  "cold_cost": 6680930.0,
+  "idle_cost": 343738140.0,
+  "total_cold_starts": 668093,
+  "total_idle_capacity": 343738140,
+  "total_demand": 2437408182,
+  "request_sla": 0.9997259002390597,
+  "extreme_sla": 0.9948944541183468,
+  "cold_start_rate": 0.010416666666666666,
+  "avg_cold_per_step": 178.44364316239316,
+  "n_timesteps": 3744,
+  "n_extreme_timesteps": 26,
+  "demand_extreme_total": 20927439,
+  "cold_extreme_total": 106846,
+  "cost_model": {
+    "c_cold": 10,
+    "c_idle": 1,
+    "note": "Experimental assumption, not from cloud pricing"
+  },
+  "alpha": 0.99,
+  "volatility_window": 30,
+  "evt_threshold_percentile": 85,
+  "config_key": "a0.990_W030_P85",
+  "base_model": "TCN",
+  "sim_time_seconds": 0.2042086124420166
+}

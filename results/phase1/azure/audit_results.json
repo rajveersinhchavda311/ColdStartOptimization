@@ -1,6 +1,6 @@
 {
-  "total": 51,
-  "passed": 51,
+  "total": 74,
+  "passed": 74,
   "failed": 0,
   "overall": "PASS",
   "checks": [
@@ -12,7 +12,7 @@
     {
       "name": "Test data is chronologically after training data",
       "status": "PASS",
-      "detail": "train_max=2019-01-09 09:39:00, test_min=2019-01-12 04:50:00"
+      "detail": "train_max=2019-01-09 19:11:00, test_min=2019-01-12 09:36:00"
     },
     {
       "name": "Reactive predictions == lag_1 (no leakage from concurrency)",
@@ -27,22 +27,22 @@
     {
       "name": "Static P90 value matches np.percentile(train, 90)",
       "status": "PASS",
-      "detail": "predicted=697949.2, expected=697949.2"
+      "detail": "predicted=696263.8, expected=696263.8"
     },
     {
       "name": "[Reactive] Request SLA = 1 - (total_cold / total_demand)",
       "status": "PASS",
-      "detail": "stored=0.9846280507, recomputed=0.9846280507"
+      "detail": "stored=0.9847903666, recomputed=0.9847903666"
     },
     {
       "name": "[Reactive] Extreme SLA = 1 - (cold_extreme / demand_extreme)",
       "status": "PASS",
-      "detail": "stored=0.9484043734, recomputed=0.9484043734"
+      "detail": "stored=0.9490601311, recomputed=0.9490601311"
     },
     {
       "name": "[Reactive] total_cost == cold_cost + idle_cost",
       "status": "PASS",
-      "detail": "stored=439684665.0, recomputed=439684665.0"
+      "detail": "stored=407765210.0, recomputed=407765210.0"
     },
     {
       "name": "[Reactive] cold_starts = max(0, demand - provisioned) at each step",
@@ -62,17 +62,17 @@
     {
       "name": "[Static_P90] Request SLA = 1 - (total_cold / total_demand)",
       "status": "PASS",
-      "detail": "stored=0.9932634720, recomputed=0.9932634720"
+      "detail": "stored=0.9924844402, recomputed=0.9924844402"
     },
     {
       "name": "[Static_P90] Extreme SLA = 1 - (cold_extreme / demand_extreme)",
       "status": "PASS",
-      "detail": "stored=0.8728617044, recomputed=0.8728617044"
+      "detail": "stored=0.8650300689, recomputed=0.8650300689"
     },
     {
       "name": "[Static_P90] total_cost == cold_cost + idle_cost",
       "status": "PASS",
-      "detail": "stored=404972840.0, recomputed=404972840.0"
+      "detail": "stored=370907591.0, recomputed=370907591.0"
     },
     {
       "name": "[Static_P90] cold_starts = max(0, demand - provisioned) at each step",
@@ -92,17 +92,17 @@
     {
       "name": "[Forecast_Only] Request SLA = 1 - (total_cold / total_demand)",
       "status": "PASS",
-      "detail": "stored=0.9818964529, recomputed=0.9818964529"
+      "detail": "stored=0.9822521109, recomputed=0.9822521109"
     },
     {
       "name": "[Forecast_Only] Extreme SLA = 1 - (cold_extreme / demand_extreme)",
       "status": "PASS",
-      "detail": "stored=0.8996129774, recomputed=0.8996129774"
+      "detail": "stored=0.8966355128, recomputed=0.8966355128"
     },
     {
       "name": "[Forecast_Only] total_cost == cold_cost + idle_cost",
       "status": "PASS",
-      "detail": "stored=517668261.0, recomputed=517668261.0"
+      "detail": "stored=475762660.0, recomputed=475762660.0"
     },
     {
       "name": "[Forecast_Only] cold_starts = max(0, demand - provisioned) at each step",
@@ -120,19 +120,79 @@
       "detail": "0 violations found"
     },
     {
+      "name": "[Seasonal_Naive] Request SLA = 1 - (total_cold / total_demand)",
+      "status": "PASS",
+      "detail": "stored=0.9501845662, recomputed=0.9501845662"
+    },
+    {
+      "name": "[Seasonal_Naive] Extreme SLA = 1 - (cold_extreme / demand_extreme)",
+      "status": "PASS",
+      "detail": "stored=0.9011606246, recomputed=0.9011606246"
+    },
+    {
+      "name": "[Seasonal_Naive] total_cost == cold_cost + idle_cost",
+      "status": "PASS",
+      "detail": "stored=1262838389.0, recomputed=1262838389.0"
+    },
+    {
+      "name": "[Seasonal_Naive] cold_starts = max(0, demand - provisioned) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Seasonal_Naive] idle = max(0, provisioned - demand) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Seasonal_Naive] No timestep has both cold starts AND idle",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
+      "name": "[Linear_Seasonal] Request SLA = 1 - (total_cold / total_demand)",
+      "status": "PASS",
+      "detail": "stored=0.9814718818, recomputed=0.9814718818"
+    },
+    {
+      "name": "[Linear_Seasonal] Extreme SLA = 1 - (cold_extreme / demand_extreme)",
+      "status": "PASS",
+      "detail": "stored=0.9383290999, recomputed=0.9383290999"
+    },
+    {
+      "name": "[Linear_Seasonal] total_cost == cold_cost + idle_cost",
+      "status": "PASS",
+      "detail": "stored=478079673.0, recomputed=478079673.0"
+    },
+    {
+      "name": "[Linear_Seasonal] cold_starts = max(0, demand - provisioned) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Linear_Seasonal] idle = max(0, provisioned - demand) at each step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Linear_Seasonal] No timestep has both cold starts AND idle",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
       "name": "[TCN] Request SLA = 1 - (total_cold / total_demand)",
       "status": "PASS",
-      "detail": "stored=0.9739530111, recomputed=0.9739530111"
+      "detail": "stored=0.9858960070, recomputed=0.9858960070"
     },
     {
       "name": "[TCN] Extreme SLA = 1 - (cold_extreme / demand_extreme)",
       "status": "PASS",
-      "detail": "stored=0.8803649833, recomputed=0.8803649833"
+      "detail": "stored=0.9435790017, recomputed=0.9435790017"
     },
     {
       "name": "[TCN] total_cost == cold_cost + idle_cost",
       "status": "PASS",
-      "detail": "stored=695325761.0, recomputed=695325761.0"
+      "detail": "stored=371364913.0, recomputed=371364913.0"
     },
     {
       "name": "[TCN] cold_starts = max(0, demand - provisioned) at each step",
@@ -165,6 +225,21 @@
       "detail": ""
     },
     {
+      "name": "Seasonal Naive: prediction == lag_1440 exactly",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Linear Seasonal: predictions are non-constant (fitted model)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Linear Seasonal: predictions use both lag_1 and lag_1440 (differ from both Reactive and Seasonal Naive)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "TCN: predictions are NOT constant (learned model)",
       "status": "PASS",
       "detail": ""
@@ -177,7 +252,7 @@
     {
       "name": "Extreme threshold computed from train P99",
       "status": "PASS",
-      "detail": "threshold=779,904"
+      "detail": "threshold=785,458"
     },
     {
       "name": "[Reactive] is_extreme flag matches train-derived threshold",
@@ -195,6 +270,16 @@
       "detail": ""
     },
     {
+      "name": "[Seasonal_Naive] is_extreme flag matches train-derived threshold",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Linear_Seasonal] is_extreme flag matches train-derived threshold",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "[TCN] is_extreme flag matches train-derived threshold",
       "status": "PASS",
       "detail": ""
@@ -202,7 +287,7 @@
     {
       "name": "Extreme threshold != P99(test) (no test leakage)",
       "status": "PASS",
-      "detail": "train_threshold=779904, test_p99=775013"
+      "detail": "train_threshold=785458, test_p99=777139"
     },
     {
       "name": "[Reactive] Reproducible: two runs produce identical predictions",
@@ -216,6 +301,16 @@
     },
     {
       "name": "[Forecast_Only] Reproducible: two runs produce identical predictions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Seasonal_Naive] Reproducible: two runs produce identical predictions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Linear_Seasonal] Reproducible: two runs produce identical predictions",
       "status": "PASS",
       "detail": ""
     },
@@ -246,6 +341,26 @@
     },
     {
       "name": "[Forecast_Only] No negative cold starts or idle capacity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Seasonal_Naive] served + cold_starts == demand at every timestep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Seasonal_Naive] No negative cold starts or idle capacity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Linear_Seasonal] served + cold_starts == demand at every timestep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Linear_Seasonal] No negative cold starts or idle capacity",
       "status": "PASS",
       "detail": ""
     },

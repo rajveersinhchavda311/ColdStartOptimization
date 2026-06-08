@@ -1,0 +1,748 @@
+{
+  "total_checks": 148,
+  "passed": 148,
+  "failed": 0,
+  "overall": "PASS",
+  "checks": [
+    {
+      "name": "Phase 3 diagnostics exist",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "All Phase 3 runs use identical test demands",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Test set has 3,744 timesteps (expected 3,744)",
+      "status": "PASS",
+      "detail": "got 3744"
+    },
+    {
+      "name": "Extreme timestep count identical across all runs",
+      "status": "PASS",
+      "detail": "got counts: {26}"
+    },
+    {
+      "name": "Extreme flag count > 0 (threshold=785,458)",
+      "status": "PASS",
+      "detail": "n_extreme=26"
+    },
+    {
+      "name": "Phase 3 extreme flags match Phase 1 (same threshold, same test)",
+      "status": "PASS",
+      "detail": "p3_extreme=26, p1_extreme=26"
+    },
+    {
+      "name": "[Reactive] Multiple configs found for comparison",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Reactive] All base predictions identical across configs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Reactive] Buffer is non-zero (EVT layer is active)",
+      "status": "PASS",
+      "detail": "mean(|buffer|) = 71080.8164"
+    },
+    {
+      "name": "[TCN] Multiple configs found for comparison",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[TCN] All base predictions identical across configs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[TCN] Buffer is non-zero (EVT layer is active)",
+      "status": "PASS",
+      "detail": "mean(|buffer|) = 52098.2967"
+    },
+    {
+      "name": "[Reactive] Anchor config results found",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Reactive] Anchor Request SLA matches Phase 2 (tol=1e-06)",
+      "status": "PASS",
+      "detail": "p3=0.99964497  p2=0.99964497  diff=0.00e+00"
+    },
+    {
+      "name": "[Reactive] Anchor Total Cost matches Phase 2 (tol=1)",
+      "status": "PASS",
+      "detail": "p3=446,556,913  p2=446,556,913  diff=0"
+    },
+    {
+      "name": "[TCN] Anchor config results found",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[TCN] Anchor Request SLA matches Phase 2 (tol=1e-04)",
+      "status": "PASS",
+      "detail": "p3=0.99969562  p2=0.99969562  diff=0.00e+00"
+    },
+    {
+      "name": "[TCN] Anchor Total Cost matches Phase 2 (tol=1,000,000)",
+      "status": "PASS",
+      "detail": "p3=342,367,156  p2=342,367,156  diff=0"
+    },
+    {
+      "name": "[a0.950_W010_P85 Reactive] sigma_train warm-up: first 10 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.950_W010_P85 TCN] sigma_train warm-up: first 10 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.950_W010_P95 Reactive] sigma_train warm-up: first 10 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.950_W010_P95 TCN] sigma_train warm-up: first 10 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.950_W030_P90 Reactive] sigma_train warm-up: first 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.950_W030_P90 TCN] sigma_train warm-up: first 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.950_W060_P85 Reactive] sigma_train warm-up: first 60 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.950_W060_P85 TCN] sigma_train warm-up: first 60 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.950_W060_P95 Reactive] sigma_train warm-up: first 60 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.950_W060_P95 TCN] sigma_train warm-up: first 60 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.975_W030_P90 Reactive] sigma_train warm-up: first 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.975_W030_P90 TCN] sigma_train warm-up: first 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W010_P85 Reactive] sigma_train warm-up: first 10 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W010_P85 TCN] sigma_train warm-up: first 10 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W010_P90 Reactive] sigma_train warm-up: first 10 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W010_P90 TCN] sigma_train warm-up: first 10 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W010_P95 Reactive] sigma_train warm-up: first 10 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W010_P95 TCN] sigma_train warm-up: first 10 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W030_P85 Reactive] sigma_train warm-up: first 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W030_P85 TCN] sigma_train warm-up: first 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W030_P90 Reactive] sigma_train warm-up: first 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W030_P90 TCN] sigma_train warm-up: first 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W030_P95 Reactive] sigma_train warm-up: first 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W030_P95 TCN] sigma_train warm-up: first 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W060_P85 Reactive] sigma_train warm-up: first 60 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W060_P85 TCN] sigma_train warm-up: first 60 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W060_P90 Reactive] sigma_train warm-up: first 60 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W060_P90 TCN] sigma_train warm-up: first 60 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W060_P95 Reactive] sigma_train warm-up: first 60 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.990_W060_P95 TCN] sigma_train warm-up: first 60 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": "warm-up max deviation: 0.00e+00"
+    },
+    {
+      "name": "[a0.950_W010_P85 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3733"
+    },
+    {
+      "name": "[a0.950_W010_P85 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3735"
+    },
+    {
+      "name": "[a0.950_W010_P95 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3733"
+    },
+    {
+      "name": "[a0.950_W010_P95 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3735"
+    },
+    {
+      "name": "[a0.950_W030_P90 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[a0.950_W030_P90 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[a0.950_W060_P85 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3685"
+    },
+    {
+      "name": "[a0.950_W060_P85 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3685"
+    },
+    {
+      "name": "[a0.950_W060_P95 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3685"
+    },
+    {
+      "name": "[a0.950_W060_P95 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3685"
+    },
+    {
+      "name": "[a0.975_W030_P90 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[a0.975_W030_P90 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[a0.990_W010_P85 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3733"
+    },
+    {
+      "name": "[a0.990_W010_P85 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3735"
+    },
+    {
+      "name": "[a0.990_W010_P90 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3733"
+    },
+    {
+      "name": "[a0.990_W010_P90 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3735"
+    },
+    {
+      "name": "[a0.990_W010_P95 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3733"
+    },
+    {
+      "name": "[a0.990_W010_P95 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3735"
+    },
+    {
+      "name": "[a0.990_W030_P85 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[a0.990_W030_P85 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[a0.990_W030_P90 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[a0.990_W030_P90 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[a0.990_W030_P95 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[a0.990_W030_P95 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[a0.990_W060_P85 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3685"
+    },
+    {
+      "name": "[a0.990_W060_P85 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3685"
+    },
+    {
+      "name": "[a0.990_W060_P90 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3685"
+    },
+    {
+      "name": "[a0.990_W060_P90 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3685"
+    },
+    {
+      "name": "[a0.990_W060_P95 Reactive] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3685"
+    },
+    {
+      "name": "[a0.990_W060_P95 TCN] sigma_t has >1 distinct value",
+      "status": "PASS",
+      "detail": "unique values: 3685"
+    },
+    {
+      "name": "[a0.950_W010_P85 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.4145"
+    },
+    {
+      "name": "[a0.950_W010_P85 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.4449"
+    },
+    {
+      "name": "[a0.950_W010_P95 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.4145"
+    },
+    {
+      "name": "[a0.950_W010_P95 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.4449"
+    },
+    {
+      "name": "[a0.950_W030_P90 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.2076"
+    },
+    {
+      "name": "[a0.950_W030_P90 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.2613"
+    },
+    {
+      "name": "[a0.950_W060_P85 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.1171"
+    },
+    {
+      "name": "[a0.950_W060_P85 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.1674"
+    },
+    {
+      "name": "[a0.950_W060_P95 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.1171"
+    },
+    {
+      "name": "[a0.950_W060_P95 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.1674"
+    },
+    {
+      "name": "[a0.975_W030_P90 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.2076"
+    },
+    {
+      "name": "[a0.975_W030_P90 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.2613"
+    },
+    {
+      "name": "[a0.990_W010_P85 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.4145"
+    },
+    {
+      "name": "[a0.990_W010_P85 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.4449"
+    },
+    {
+      "name": "[a0.990_W010_P90 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.4145"
+    },
+    {
+      "name": "[a0.990_W010_P90 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.4449"
+    },
+    {
+      "name": "[a0.990_W010_P95 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.4145"
+    },
+    {
+      "name": "[a0.990_W010_P95 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.4449"
+    },
+    {
+      "name": "[a0.990_W030_P85 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.2076"
+    },
+    {
+      "name": "[a0.990_W030_P85 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.2613"
+    },
+    {
+      "name": "[a0.990_W030_P90 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.2076"
+    },
+    {
+      "name": "[a0.990_W030_P90 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.2613"
+    },
+    {
+      "name": "[a0.990_W030_P95 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.2076"
+    },
+    {
+      "name": "[a0.990_W030_P95 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.2613"
+    },
+    {
+      "name": "[a0.990_W060_P85 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.1171"
+    },
+    {
+      "name": "[a0.990_W060_P85 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.1674"
+    },
+    {
+      "name": "[a0.990_W060_P90 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.1171"
+    },
+    {
+      "name": "[a0.990_W060_P90 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.1674"
+    },
+    {
+      "name": "[a0.990_W060_P95 Reactive] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.1171"
+    },
+    {
+      "name": "[a0.990_W060_P95 TCN] CV(buffer_t) > 0.01",
+      "status": "PASS",
+      "detail": "CV = 0.1674"
+    },
+    {
+      "name": "[a0.950_W010_P85 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.950_W010_P85 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.950_W010_P95 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.950_W010_P95 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.950_W030_P90 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.950_W030_P90 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.950_W060_P85 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.950_W060_P85 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.950_W060_P95 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.950_W060_P95 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.975_W030_P90 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.975_W030_P90 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W010_P85 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W010_P85 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W010_P90 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W010_P90 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W010_P95 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W010_P95 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W030_P85 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W030_P85 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W030_P90 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W030_P90 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W030_P95 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W030_P95 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W060_P85 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W060_P85 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W060_P90 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W060_P90 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W060_P95 Reactive] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[a0.990_W060_P95 TCN] No negatives, mutual excl., accounting OK",
+      "status": "PASS",
+      "detail": "negatives=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "File exists (not deleted): results\\phase1\\azure\\metrics.json",
+      "status": "PASS",
+      "detail": "missing: C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase1\\azure\\metrics.json"
+    },
+    {
+      "name": "File non-empty: results\\phase1\\azure\\metrics.json",
+      "status": "PASS",
+      "detail": "size=4470"
+    },
+    {
+      "name": "File exists (not deleted): results\\phase1\\azure\\comparison.csv",
+      "status": "PASS",
+      "detail": "missing: C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase1\\azure\\comparison.csv"
+    },
+    {
+      "name": "File non-empty: results\\phase1\\azure\\comparison.csv",
+      "status": "PASS",
+      "detail": "size=1188"
+    },
+    {
+      "name": "File exists (not deleted): results\\phase2\\azure\\metrics.json",
+      "status": "PASS",
+      "detail": "missing: C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase2\\azure\\metrics.json"
+    },
+    {
+      "name": "File non-empty: results\\phase2\\azure\\metrics.json",
+      "status": "PASS",
+      "detail": "size=4260"
+    },
+    {
+      "name": "File exists (not deleted): results\\phase2\\azure\\comparison.csv",
+      "status": "PASS",
+      "detail": "missing: C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase2\\azure\\comparison.csv"
+    },
+    {
+      "name": "File non-empty: results\\phase2\\azure\\comparison.csv",
+      "status": "PASS",
+      "detail": "size=1119"
+    },
+    {
+      "name": "RESULTS_DIR is results/phase3/ (not phase1 or phase2)",
+      "status": "PASS",
+      "detail": "C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase3\\azure"
+    },
+    {
+      "name": "RUNS_DIR is inside results/phase3/",
+      "status": "PASS",
+      "detail": "C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase3\\azure\\runs"
+    }
+  ]
+}

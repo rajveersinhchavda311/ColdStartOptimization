@@ -29,6 +29,8 @@ sys.path.insert(0, PROJECT_ROOT)
 
 from models.reactive import ReactiveModel
 from models.forecast_only import ForecastOnlyModel
+from models.seasonal_naive import SeasonalNaiveModel
+from models.linear_seasonal import LinearSeasonalModel
 from models.tcn import TCNModel
 from models.risk_aware import RiskAwareModel
 from evaluation.simulator import simulate
@@ -72,7 +74,8 @@ def load_data():
 
     # Load Phase 2 diagnostics
     model_names = ["RiskAware(Reactive)", "RiskAware(Forecast_Only)",
-                    "RiskAware(TCN)"]
+                   "RiskAware(Seasonal_Naive)", "RiskAware(Linear_Seasonal)",
+                   "RiskAware(TCN)"]
     all_diagnostics = {}
     all_results = {}
     for name in model_names:
@@ -294,7 +297,8 @@ def audit_phase1_comparability(all_results, all_diagnostics):
     print("\n--- AUDIT 8: PHASE 1 COMPARABILITY ---")
 
     # Load Phase 1 test demands for comparison
-    phase1_models = ["Reactive", "Forecast_Only", "TCN"]
+    phase1_models = ["Reactive", "Forecast_Only", "Seasonal_Naive",
+                     "Linear_Seasonal", "TCN"]
     for p1_name in phase1_models:
         p1_path = os.path.join(PHASE1_RESULTS_DIR, f"{p1_name}_results.csv")
         p2_name = f"RiskAware({p1_name})"
@@ -356,7 +360,8 @@ def audit_reproducibility(train, val, test, threshold):
     print("\n--- AUDIT 10: REPRODUCIBILITY ---")
 
     # Only test deterministic models (skip TCN due to runtime)
-    for BaseClass in [ReactiveModel, ForecastOnlyModel]:
+    for BaseClass in [ReactiveModel, ForecastOnlyModel,
+                      SeasonalNaiveModel, LinearSeasonalModel]:
         base = BaseClass()
         model = RiskAwareModel(base, alpha=ALPHA,
                                volatility_window=VOLATILITY_WINDOW,

@@ -13,8 +13,20 @@ Value-at-Risk (CVaR).
 > **Can risk-aware provisioning reduce cold starts (improve SLA) without
 > excessive overprovisioning, compared to forecast-only strategies?**
 
-Phase 2 answers this by wrapping each Phase 1 forecaster with a
+Phase 2 answers this by wrapping five Phase 1 forecasters with a
 volatility-scaled EVT buffer and evaluating under identical conditions.
+
+### Wrapped Models
+
+| Base Model | Rationale for inclusion |
+|-----------|------------------------|
+| Reactive | Minimal baseline; lag-1 errors correlate well with demand volatility |
+| Forecast_Only | Moving average; tests smoothing-model interaction with EVT buffer |
+| Seasonal_Naive | Seasonal baseline; tests buffer on high-bias, low-variance base model |
+| Linear_Seasonal | Interpretable learned model; direct linear competitor to TCN |
+| TCN | Deep learning model; tests whether EVT further amplifies the best forecaster |
+
+Static_P90 is excluded: constant predictions produce residuals equal to (demand − constant), which reflect demand variance rather than forecast error. Applying a volatility-scaled EVT buffer to an already-conservative static provisioner is semantically incoherent.
 
 ---
 
@@ -235,6 +247,25 @@ volatility estimate. This is conservative and leakage-free.
 - All Phase 1 seeds remain unchanged.
 - EVT fitting uses scipy.stats.genpareto (deterministic MLE).
 - Rolling volatility is deterministic given the same input sequence.
-- Results are fully reproducible for deterministic base models
-  (Reactive, ForecastOnly). TCN reproducibility depends on the
-  underlying PyTorch seed behavior (verified in Phase 1).
+- Results are fully reproducible for all deterministic base models
+  (Reactive, Forecast_Only, Seasonal_Naive, Linear_Seasonal) — verified
+  by Audit 10 (two independent runs produce bit-identical predictions).
+- TCN reproducibility depends on the underlying PyTorch seed behavior
+  (verified in Phase 1 audit).
+
+## Assumptions and Limitations (Updated)
+
+See the original assumptions list above. Additional limitations surfaced
+by the 5-model comparison:
+
+6. **Smoothing-based models exhibit inverted buffer behavior during extremes.**
+   Forecast_Only and Seasonal_Naive produce lower local volatility (sigma_t)
+   during demand ramp-ups than during normal oscillation. The EVT buffer still
+   reduces cold starts by 88–97%, but the buffer does not systematically grow
+   during extreme events for these models. See `docs/phase2/verification.md`
+   for full analysis.
+
+7. **Seasonal_Naive is a weak base for risk wrapping.** With a very high
+   Phase 1 cold-start rate (121M), the EVT buffer can only partially compensate.
+   RiskAware(Seasonal_Naive) remains the weakest Phase 2 model (SLA 0.9943 vs
+   0.9996–0.9997 for others).

@@ -1,7 +1,7 @@
 {
-  "total_checks": 64,
-  "passed": 63,
-  "failed": 1,
+  "total_checks": 106,
+  "passed": 104,
+  "failed": 2,
   "overall": "FAIL",
   "checks": [
     {
@@ -25,6 +25,16 @@
       "detail": "max diff: 0.000000"
     },
     {
+      "name": "[RiskAware(Seasonal_Naive)] predicted == base_prediction + buffer",
+      "status": "PASS",
+      "detail": "max diff: 0.000000"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] predicted == base_prediction + buffer",
+      "status": "PASS",
+      "detail": "max diff: 0.000000"
+    },
+    {
       "name": "[RiskAware(TCN)] predicted == base_prediction + buffer",
       "status": "PASS",
       "detail": "max diff: 0.000000"
@@ -32,7 +42,7 @@
     {
       "name": "[RiskAware(Reactive)] sigma_t has multiple distinct values",
       "status": "PASS",
-      "detail": "unique values: 4001"
+      "detail": "unique values: 3715"
     },
     {
       "name": "[RiskAware(Reactive)] First 30 sigma_t values are sigma_train",
@@ -42,7 +52,7 @@
     {
       "name": "[RiskAware(Forecast_Only)] sigma_t has multiple distinct values",
       "status": "PASS",
-      "detail": "unique values: 4001"
+      "detail": "unique values: 3715"
     },
     {
       "name": "[RiskAware(Forecast_Only)] First 30 sigma_t values are sigma_train",
@@ -50,9 +60,29 @@
       "detail": ""
     },
     {
+      "name": "[RiskAware(Seasonal_Naive)] sigma_t has multiple distinct values",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] First 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] sigma_t has multiple distinct values",
+      "status": "PASS",
+      "detail": "unique values: 3715"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] First 30 sigma_t values are sigma_train",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "[RiskAware(TCN)] sigma_t has multiple distinct values",
       "status": "PASS",
-      "detail": "unique values: 4001"
+      "detail": "unique values: 3715"
     },
     {
       "name": "[RiskAware(TCN)] First 30 sigma_t values are sigma_train",
@@ -62,7 +92,7 @@
     {
       "name": "[RiskAware(Reactive)] sigma_train > 0",
       "status": "PASS",
-      "detail": "sigma_train = 29707.4284"
+      "detail": "sigma_train = 30283.0542"
     },
     {
       "name": "[RiskAware(Reactive)] sigma_train is finite",
@@ -72,7 +102,7 @@
     {
       "name": "[RiskAware(Forecast_Only)] sigma_train > 0",
       "status": "PASS",
-      "detail": "sigma_train = 33976.1098"
+      "detail": "sigma_train = 35984.4609"
     },
     {
       "name": "[RiskAware(Forecast_Only)] sigma_train is finite",
@@ -80,9 +110,29 @@
       "detail": ""
     },
     {
+      "name": "[RiskAware(Seasonal_Naive)] sigma_train > 0",
+      "status": "PASS",
+      "detail": "sigma_train = 56669.9044"
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] sigma_train is finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] sigma_train > 0",
+      "status": "PASS",
+      "detail": "sigma_train = 27856.4871"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] sigma_train is finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "[RiskAware(TCN)] sigma_train > 0",
       "status": "PASS",
-      "detail": "sigma_train = 30561.3050"
+      "detail": "sigma_train = 22536.4927"
     },
     {
       "name": "[RiskAware(TCN)] sigma_train is finite",
@@ -92,22 +142,22 @@
     {
       "name": "[RiskAware(Reactive)] xi < 1 (finite CVaR)",
       "status": "PASS",
-      "detail": "xi = -0.122828"
+      "detail": "xi = -0.092827"
     },
     {
       "name": "[RiskAware(Reactive)] beta > 0 (valid scale)",
       "status": "PASS",
-      "detail": "beta = 1.147512"
+      "detail": "beta = 1.112101"
     },
     {
       "name": "[RiskAware(Reactive)] CVaR_z > 0 (positive buffer multiplier)",
       "status": "PASS",
-      "detail": "CVaR_z = 4.119076"
+      "detail": "CVaR_z = 4.160499"
     },
     {
       "name": "[RiskAware(Reactive)] CVaR_z > VaR (CVaR >= VaR by definition)",
       "status": "PASS",
-      "detail": "CVaR=4.1191, VaR=3.3488"
+      "detail": "CVaR=4.1605, VaR=3.3388"
     },
     {
       "name": "[RiskAware(Reactive)] CVaR_z is finite",
@@ -117,22 +167,22 @@
     {
       "name": "[RiskAware(Forecast_Only)] xi < 1 (finite CVaR)",
       "status": "PASS",
-      "detail": "xi = -0.260815"
+      "detail": "xi = 0.002604"
     },
     {
       "name": "[RiskAware(Forecast_Only)] beta > 0 (valid scale)",
       "status": "PASS",
-      "detail": "beta = 1.194269"
+      "detail": "beta = 0.937700"
     },
     {
       "name": "[RiskAware(Forecast_Only)] CVaR_z > 0 (positive buffer multiplier)",
       "status": "PASS",
-      "detail": "CVaR_z = 3.804094"
+      "detail": "CVaR_z = 4.278235"
     },
     {
       "name": "[RiskAware(Forecast_Only)] CVaR_z > VaR (CVaR >= VaR by definition)",
       "status": "PASS",
-      "detail": "CVaR=3.8041, VaR=3.2845"
+      "detail": "CVaR=4.2782, VaR=3.3324"
     },
     {
       "name": "[RiskAware(Forecast_Only)] CVaR_z is finite",
@@ -140,24 +190,74 @@
       "detail": ""
     },
     {
+      "name": "[RiskAware(Seasonal_Naive)] xi < 1 (finite CVaR)",
+      "status": "PASS",
+      "detail": "xi = 0.184470"
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] beta > 0 (valid scale)",
+      "status": "PASS",
+      "detail": "beta = 0.519982"
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] CVaR_z > 0 (positive buffer multiplier)",
+      "status": "PASS",
+      "detail": "CVaR_z = 3.543542"
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] CVaR_z > VaR (CVaR >= VaR by definition)",
+      "status": "PASS",
+      "detail": "CVaR=3.5435, VaR=2.5684"
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] CVaR_z is finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] xi < 1 (finite CVaR)",
+      "status": "PASS",
+      "detail": "xi = 0.019196"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] beta > 0 (valid scale)",
+      "status": "PASS",
+      "detail": "beta = 0.894227"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] CVaR_z > 0 (positive buffer multiplier)",
+      "status": "PASS",
+      "detail": "CVaR_z = 4.160577"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] CVaR_z > VaR (CVaR >= VaR by definition)",
+      "status": "PASS",
+      "detail": "CVaR=4.1606, VaR=3.2076"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] CVaR_z is finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "[RiskAware(TCN)] xi < 1 (finite CVaR)",
       "status": "PASS",
-      "detail": "xi = -0.315681"
+      "detail": "xi = 0.022173"
     },
     {
       "name": "[RiskAware(TCN)] beta > 0 (valid scale)",
       "status": "PASS",
-      "detail": "beta = 1.423098"
+      "detail": "beta = 0.926549"
     },
     {
       "name": "[RiskAware(TCN)] CVaR_z > 0 (positive buffer multiplier)",
       "status": "PASS",
-      "detail": "CVaR_z = 4.381571"
+      "detail": "CVaR_z = 4.294923"
     },
     {
       "name": "[RiskAware(TCN)] CVaR_z > VaR (CVaR >= VaR by definition)",
       "status": "PASS",
-      "detail": "CVaR=4.3816, VaR=3.8587"
+      "detail": "CVaR=4.2949, VaR=3.2977"
     },
     {
       "name": "[RiskAware(TCN)] CVaR_z is finite",
@@ -167,47 +267,77 @@
     {
       "name": "[RiskAware(Reactive)] std(buffer_t) > 0",
       "status": "PASS",
-      "detail": "std = 24519.6276"
+      "detail": "std = 24231.3444"
     },
     {
       "name": "[RiskAware(Reactive)] range(buffer_t) > 0",
       "status": "PASS",
-      "detail": "range = 142263.4581"
+      "detail": "range = 143694.1476"
     },
     {
       "name": "[RiskAware(Reactive)] CV(buffer_t) > 0.01 (non-trivial variation)",
       "status": "PASS",
-      "detail": "CV = 0.2120"
+      "detail": "CV = 0.2076"
     },
     {
       "name": "[RiskAware(Forecast_Only)] std(buffer_t) > 0",
       "status": "PASS",
-      "detail": "std = 34736.1475"
+      "detail": "std = 37743.1167"
     },
     {
       "name": "[RiskAware(Forecast_Only)] range(buffer_t) > 0",
       "status": "PASS",
-      "detail": "range = 228537.2507"
+      "detail": "range = 251957.9348"
     },
     {
       "name": "[RiskAware(Forecast_Only)] CV(buffer_t) > 0.01 (non-trivial variation)",
       "status": "PASS",
-      "detail": "CV = 0.3047"
+      "detail": "CV = 0.2961"
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] std(buffer_t) > 0",
+      "status": "PASS",
+      "detail": "std = 36716.3019"
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] range(buffer_t) > 0",
+      "status": "PASS",
+      "detail": "range = 210324.1397"
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] CV(buffer_t) > 0.01 (non-trivial variation)",
+      "status": "PASS",
+      "detail": "CV = 0.4149"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] std(buffer_t) > 0",
+      "status": "PASS",
+      "detail": "std = 22502.7315"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] range(buffer_t) > 0",
+      "status": "PASS",
+      "detail": "range = 136318.1078"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] CV(buffer_t) > 0.01 (non-trivial variation)",
+      "status": "PASS",
+      "detail": "CV = 0.2245"
     },
     {
       "name": "[RiskAware(TCN)] std(buffer_t) > 0",
       "status": "PASS",
-      "detail": "std = 32811.0759"
+      "detail": "std = 23795.6453"
     },
     {
       "name": "[RiskAware(TCN)] range(buffer_t) > 0",
       "status": "PASS",
-      "detail": "range = 200273.5237"
+      "detail": "range = 150260.6215"
     },
     {
       "name": "[RiskAware(TCN)] CV(buffer_t) > 0.01 (non-trivial variation)",
       "status": "PASS",
-      "detail": "CV = 0.2783"
+      "detail": "CV = 0.2613"
     },
     {
       "name": "[RiskAware(Reactive)] corr(sigma_t, buffer_t) > 0.99",
@@ -220,6 +350,16 @@
       "detail": "correlation = 1.000000"
     },
     {
+      "name": "[RiskAware(Seasonal_Naive)] corr(sigma_t, buffer_t) > 0.99",
+      "status": "PASS",
+      "detail": "correlation = 1.000000"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] corr(sigma_t, buffer_t) > 0.99",
+      "status": "PASS",
+      "detail": "correlation = 1.000000"
+    },
+    {
       "name": "[RiskAware(TCN)] corr(sigma_t, buffer_t) > 0.99",
       "status": "PASS",
       "detail": "correlation = 1.000000"
@@ -227,17 +367,27 @@
     {
       "name": "[RiskAware(Reactive)] mean(buffer|extreme) > mean(buffer|normal)",
       "status": "PASS",
-      "detail": "extreme=118,856.84, normal=115,616.43, ratio=1.03x"
+      "detail": "extreme=121,161.81, normal=116,706.24, ratio=1.04x"
     },
     {
       "name": "[RiskAware(Forecast_Only)] mean(buffer|extreme) > mean(buffer|normal)",
       "status": "FAIL",
-      "detail": "extreme=108,226.87, normal=114,059.53, ratio=0.95x"
+      "detail": "extreme=123,859.98, normal=127,475.63, ratio=0.97x"
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] mean(buffer|extreme) > mean(buffer|normal)",
+      "status": "FAIL",
+      "detail": "extreme=76,849.96, normal=88,584.55, ratio=0.87x"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] mean(buffer|extreme) > mean(buffer|normal)",
+      "status": "PASS",
+      "detail": "extreme=102,705.54, normal=100,196.93, ratio=1.03x"
     },
     {
       "name": "[RiskAware(TCN)] mean(buffer|extreme) > mean(buffer|normal)",
       "status": "PASS",
-      "detail": "extreme=118,520.37, normal=117,904.84, ratio=1.01x"
+      "detail": "extreme=93,993.67, normal=91,056.07, ratio=1.03x"
     },
     {
       "name": "[RiskAware(Reactive)] Same test demands as Phase 1 Reactive",
@@ -256,6 +406,26 @@
     },
     {
       "name": "[RiskAware(Forecast_Only)] Same extreme flags as Phase 1 Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] Same test demands as Phase 1 Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] Same extreme flags as Phase 1 Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] Same test demands as Phase 1 Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] Same extreme flags as Phase 1 Linear_Seasonal",
       "status": "PASS",
       "detail": ""
     },
@@ -300,6 +470,36 @@
       "detail": "0 timesteps violate"
     },
     {
+      "name": "[RiskAware(Seasonal_Naive)] served + cold_starts == demand",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] No negative cold starts or idle capacity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] No timestep has both cold starts AND idle",
+      "status": "PASS",
+      "detail": "0 timesteps violate"
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] served + cold_starts == demand",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] No negative cold starts or idle capacity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] No timestep has both cold starts AND idle",
+      "status": "PASS",
+      "detail": "0 timesteps violate"
+    },
+    {
       "name": "[RiskAware(TCN)] served + cold_starts == demand",
       "status": "PASS",
       "detail": ""
@@ -321,6 +521,16 @@
     },
     {
       "name": "[RiskAware(Forecast_Only)] Reproducible: two runs identical",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Seasonal_Naive)] Reproducible: two runs identical",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[RiskAware(Linear_Seasonal)] Reproducible: two runs identical",
       "status": "PASS",
       "detail": ""
     }

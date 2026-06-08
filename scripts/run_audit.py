@@ -27,6 +27,8 @@ sys.path.insert(0, PROJECT_ROOT)
 from models.reactive import ReactiveModel
 from models.static_p90 import StaticP90Model
 from models.forecast_only import ForecastOnlyModel
+from models.seasonal_naive import SeasonalNaiveModel
+from models.linear_seasonal import LinearSeasonalModel
 from models.tcn import TCNModel
 from evaluation.extreme import compute_extreme_threshold, EXTREME_PERCENTILE
 from evaluation.metrics import compute_metrics, C_COLD, C_IDLE
@@ -206,6 +208,25 @@ def audit_baselines(train, test, all_results):
         audit("Forecast Only: prediction == mean(lag_1..lag_10)",
               np.allclose(actual, expected, atol=1e-4))
 
+    # Seasonal Naive: prediction = lag_1440
+    seasonal_results = all_results.get("Seasonal_Naive")
+    if seasonal_results is not None:
+        expected = test["lag_1440"].values.astype(np.float64)
+        actual = seasonal_results["predicted"].values
+        audit("Seasonal Naive: prediction == lag_1440 exactly",
+              np.allclose(actual, expected, atol=1e-6))
+
+    # Linear Seasonal: verify predictions are non-constant and differ from baselines
+    linear_results = all_results.get("Linear_Seasonal")
+    if linear_results is not None:
+        preds = linear_results["predicted"].values
+        audit("Linear Seasonal: predictions are non-constant (fitted model)",
+              np.std(preds) > 100)
+        audit("Linear Seasonal: predictions use both lag_1 and lag_1440 "
+              "(differ from both Reactive and Seasonal Naive)",
+              not np.allclose(preds, test["lag_1"].values.astype(float), atol=100)
+              and not np.allclose(preds, test["lag_1440"].values.astype(float), atol=100))
+
     # TCN: verify it's actually a TCN (check architecture)
     tcn_results = all_results.get("TCN")
     if tcn_results is not None:
@@ -258,8 +279,9 @@ def audit_reproducibility(train, val, test, threshold):
     """Run two models and verify identical predictions."""
     print("\n--- AUDIT 5: REPRODUCIBILITY ---")
 
-    # Test reproducibility with deterministic models (Reactive, Static P90, Forecast)
-    for ModelClass in [ReactiveModel, StaticP90Model, ForecastOnlyModel]:
+    # Test reproducibility with deterministic models
+    for ModelClass in [ReactiveModel, StaticP90Model, ForecastOnlyModel,
+                       SeasonalNaiveModel, LinearSeasonalModel]:
         m1 = ModelClass()
         m1.fit(train)
         pred1 = m1.predict(test)

@@ -1,6 +1,4 @@
-Extreme Event Threshold Documentation
-==================================================
+Extreme Event Threshold
 Percentile: P99
 Source: TRAINING data ONLY
-Value: 779,904
-NOT derived from: validation data, test data, or evaluation outputs
+Value: 785,458

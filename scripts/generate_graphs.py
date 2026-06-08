@@ -8,11 +8,12 @@ Generates publication-quality graphs for Phase 1 results:
     3. Extreme event analysis (test demand with threshold + cold start markers)
     4. Demand distribution (histogram with P90, P99 lines)
     5. Baseline vs actual time series (multi-panel, representative window)
-    6. Cold start heatmap (where cold starts occur for each model)
+    6. Cold start timeline (where cold starts occur per model)
+    7. Prediction error distribution (2-row grid)
 
 All graphs use:
     - Publication-quality styling
-    - Consistent color palette
+    - Consistent color palette across all 6 models
     - Saved as PNG (300 DPI)
 """
 
@@ -26,7 +27,6 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 
-# Add project root to path
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
 
@@ -37,17 +37,18 @@ RESULTS_DIR = os.path.join(PROJECT_ROOT, "results", "phase1", "azure")
 GRAPHS_DIR = os.path.join(PROJECT_ROOT, "graphs", "phase1", "azure")
 DATA_DIR = os.path.join(PROJECT_ROOT, "data", "processed", "azure")
 
-# Publication color palette
+# Publication color palette — one color per model
 COLORS = {
-    "Reactive": "#4e79a7",
-    "Static_P90": "#f28e2b",
-    "Forecast_Only": "#e15759",
-    "TCN": "#59a14f",
+    "Reactive":        "#4e79a7",
+    "Static_P90":      "#f28e2b",
+    "Forecast_Only":   "#e15759",
+    "Seasonal_Naive":  "#76b7b2",
+    "Linear_Seasonal": "#59a14f",
+    "TCN":             "#b07aa1",
 }
 COLD_COLOR = "#d62728"
 IDLE_COLOR = "#aec7e8"
 
-# Style
 plt.rcParams.update({
     "font.family": "serif",
     "font.size": 11,
@@ -65,26 +66,22 @@ plt.rcParams.update({
 
 
 def load_data():
-    """Load all results and metrics."""
-    # Load metrics
     with open(os.path.join(RESULTS_DIR, "metrics.json"), "r") as f:
         all_metrics = json.load(f)
 
-    # Load per-model results
     all_results = {}
     for model_name in all_metrics.keys():
         path = os.path.join(RESULTS_DIR, f"{model_name}_results.csv")
         all_results[model_name] = pd.read_csv(path, parse_dates=["timestamp"])
 
-    # Load training data for distribution plots
-    train_df = pd.read_csv(os.path.join(DATA_DIR, "train.csv"), parse_dates=["timestamp"])
-
+    train_df = pd.read_csv(os.path.join(DATA_DIR, "train.csv"),
+                           parse_dates=["timestamp"])
     return all_metrics, all_results, train_df
 
 
 def plot_cost_comparison(all_metrics):
-    """Bar chart: total cost decomposed into cold cost + idle cost."""
-    fig, ax = plt.subplots(figsize=(10, 6))
+    """Stacked bar: cold cost + idle cost per model."""
+    fig, ax = plt.subplots(figsize=(12, 6))
 
     models = list(all_metrics.keys())
     x = np.arange(len(models))
@@ -93,23 +90,34 @@ def plot_cost_comparison(all_metrics):
     cold_costs = [all_metrics[m]["cold_cost"] for m in models]
     idle_costs = [all_metrics[m]["idle_cost"] for m in models]
 
-    bars1 = ax.bar(x, cold_costs, width, label="Cold Start Cost", color=COLD_COLOR, alpha=0.85)
-    bars2 = ax.bar(x, idle_costs, width, bottom=cold_costs, label="Idle Capacity Cost",
-                   color=IDLE_COLOR, alpha=0.85)
+    bar_colors = [COLORS.get(m, "#999999") for m in models]
+
+    ax.bar(x, cold_costs, width, label="Cold Start Cost",
+           color=bar_colors, alpha=0.9)
+    ax.bar(x, idle_costs, width, bottom=cold_costs,
+           label="Idle Capacity Cost", color=bar_colors, alpha=0.35)
 
     ax.set_xlabel("Model")
     ax.set_ylabel("Total Cost")
-    ax.set_title("Cost Comparison: Cold Start vs Idle Capacity\n(c_cold=10, c_idle=1 -- experimental assumption)")
+    ax.set_title("Phase 1: Cost Comparison — Cold Start vs Idle Capacity\n"
+                 "(c_cold=10, c_idle=1 — experimental assumption)")
     ax.set_xticks(x)
-    ax.set_xticklabels(models)
-    ax.legend()
-    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, p: f"{x/1e6:.0f}M"))
+    ax.set_xticklabels(models, rotation=15, ha="right")
 
-    # Add total cost labels
+    # Custom legend for fill style
+    from matplotlib.patches import Patch
+    legend_elements = [
+        Patch(facecolor="#555555", alpha=0.9, label="Cold Start Cost (solid)"),
+        Patch(facecolor="#555555", alpha=0.35, label="Idle Capacity Cost (light)"),
+    ]
+    ax.legend(handles=legend_elements, loc="upper right")
+    ax.yaxis.set_major_formatter(
+        mticker.FuncFormatter(lambda v, _: f"{v/1e6:.0f}M"))
+
     for i, m in enumerate(models):
         total = all_metrics[m]["total_cost"]
         ax.text(i, total + total * 0.01, f"{total/1e6:.1f}M",
-                ha="center", va="bottom", fontsize=9, fontweight="bold")
+                ha="center", va="bottom", fontsize=8, fontweight="bold")
 
     plt.tight_layout()
     path = os.path.join(GRAPHS_DIR, "cost_comparison.png")
@@ -119,9 +127,7 @@ def plot_cost_comparison(all_metrics):
 
 
 def plot_sla_comparison(all_metrics):
-    """Grouped bar chart: Request SLA and Extreme SLA."""
-    fig, ax = plt.subplots(figsize=(10, 6))
-
+    """Grouped bar chart: Request SLA and Extreme SLA for all models."""
     models = list(all_metrics.keys())
     x = np.arange(len(models))
     width = 0.35
@@ -129,25 +135,30 @@ def plot_sla_comparison(all_metrics):
     request_sla = [all_metrics[m]["request_sla"] for m in models]
     extreme_sla = [all_metrics[m]["extreme_sla"] for m in models]
 
-    bars1 = ax.bar(x - width/2, request_sla, width, label="Request SLA",
-                   color="#4e79a7", alpha=0.85)
-    bars2 = ax.bar(x + width/2, extreme_sla, width, label="Extreme Event SLA",
-                   color="#e15759", alpha=0.85)
+    fig, ax = plt.subplots(figsize=(12, 6))
+    ax.bar(x - width/2, request_sla, width, label="Request SLA",
+           color="#4e79a7", alpha=0.85)
+    ax.bar(x + width/2, extreme_sla, width, label="Extreme Event SLA",
+           color="#e15759", alpha=0.85)
 
     ax.set_xlabel("Model")
     ax.set_ylabel("SLA (fraction of requests served)")
-    ax.set_title("SLA Comparison: Overall vs Extreme Events\n(Extreme = demand > P99 of training data)")
+    ax.set_title("Phase 1: SLA Comparison — Overall vs Extreme Events\n"
+                 "(Extreme = demand > P99 of training data)")
     ax.set_xticks(x)
-    ax.set_xticklabels(models)
+    ax.set_xticklabels(models, rotation=15, ha="right")
     ax.legend()
-    ax.set_ylim(min(min(request_sla), min(extreme_sla)) * 0.98, 1.002)
+    ax.set_ylim(min(min(request_sla), min(extreme_sla)) * 0.97, 1.002)
 
-    # Add value labels
-    for bar_group in [bars1, bars2]:
-        for bar in bar_group:
-            height = bar.get_height()
-            ax.text(bar.get_x() + bar.get_width()/2., height + 0.001,
-                    f"{height:.4f}", ha="center", va="bottom", fontsize=8)
+    for bars in [
+        ax.patches[:len(models)],   # request bars
+        ax.patches[len(models):],   # extreme bars
+    ]:
+        for bar in bars:
+            h = bar.get_height()
+            if h > 0:
+                ax.text(bar.get_x() + bar.get_width()/2., h + 0.001,
+                        f"{h:.4f}", ha="center", va="bottom", fontsize=7)
 
     plt.tight_layout()
     path = os.path.join(GRAPHS_DIR, "sla_comparison.png")
@@ -157,39 +168,34 @@ def plot_sla_comparison(all_metrics):
 
 
 def plot_extreme_event_analysis(all_results, train_df):
-    """Scatter plot of test demand with extreme threshold and cold start markers."""
-    # Compute P99 threshold from training data
+    """Test demand timeline with P99 threshold and extreme-event markers."""
     threshold = np.percentile(train_df["concurrency"].values, 99)
-
-    # Use first model's results for demand (same across all models)
     first_model = list(all_results.keys())[0]
     results = all_results[first_model]
 
-    fig, ax = plt.subplots(figsize=(14, 6))
-
+    fig, ax = plt.subplots(figsize=(14, 5))
     timestamps = results["timestamp"]
     demand = results["actual_demand"]
-    is_extreme = results["is_extreme"]
+    extreme_mask = results["is_extreme"].astype(bool)
 
-    # Plot all demand
-    ax.plot(timestamps, demand, color="#999999", linewidth=0.5, alpha=0.6, label="Demand")
-
-    # Highlight extreme events
-    extreme_mask = is_extreme.astype(bool)
+    ax.plot(timestamps, demand, color="#999999", linewidth=0.5,
+            alpha=0.6, label="Demand")
     ax.scatter(timestamps[extreme_mask], demand[extreme_mask],
-               color=COLD_COLOR, s=15, zorder=5, label=f"Extreme events (n={extreme_mask.sum()})")
-
-    # Threshold line
+               color=COLD_COLOR, s=15, zorder=5,
+               label=f"Extreme events (n={extreme_mask.sum()})")
     ax.axhline(y=threshold, color="#ff7f0e", linestyle="--", linewidth=2,
                label=f"P99 threshold = {threshold:,.0f}")
 
     ax.set_xlabel("Time")
-    ax.set_ylabel("Demand (concurrency)")
-    ax.set_title("Test Set: Demand Timeline with Extreme Event Identification\n(Threshold = P99 of TRAINING data)")
+    ax.set_ylabel("Demand (invocations/min)")
+    ax.set_title("Test Set: Demand Timeline with Extreme Event Identification\n"
+                 "(Threshold = P99 of TRAINING data only)")
     ax.legend(loc="upper right")
+    ax.yaxis.set_major_formatter(
+        mticker.FuncFormatter(lambda v, _: f"{v/1e3:.0f}K"))
     plt.xticks(rotation=45)
-
     plt.tight_layout()
+
     path = os.path.join(GRAPHS_DIR, "extreme_event_analysis.png")
     plt.savefig(path)
     plt.close()
@@ -197,26 +203,28 @@ def plot_extreme_event_analysis(all_results, train_df):
 
 
 def plot_demand_distribution(train_df):
-    """Histogram of training demand with P90 and P99 lines."""
+    """Histogram of training demand with P90 and P99 annotation lines."""
     fig, ax = plt.subplots(figsize=(10, 6))
-
     demand = train_df["concurrency"].values
     p90 = np.percentile(demand, 90)
     p99 = np.percentile(demand, 99)
 
-    ax.hist(demand, bins=80, color="#4e79a7", alpha=0.7, edgecolor="white", linewidth=0.5)
+    ax.hist(demand, bins=80, color="#4e79a7", alpha=0.7,
+            edgecolor="white", linewidth=0.5)
+    ax.axvline(x=demand.mean(), color="#59a14f", linestyle="-.",
+               linewidth=1.5, label=f"Mean = {demand.mean():,.0f}")
     ax.axvline(x=p90, color="#f28e2b", linestyle="--", linewidth=2,
-               label=f"P90 = {p90:,.0f}")
+               label=f"P90 = {p90:,.0f}  (Static_P90 threshold)")
     ax.axvline(x=p99, color="#e15759", linestyle="--", linewidth=2,
-               label=f"P99 = {p99:,.0f}")
-    ax.axvline(x=demand.mean(), color="#59a14f", linestyle="-.", linewidth=1.5,
-               label=f"Mean = {demand.mean():,.0f}")
+               label=f"P99 = {p99:,.0f}  (extreme event threshold)")
 
-    ax.set_xlabel("Concurrency (requests/minute)")
+    ax.set_xlabel("Demand (invocations/min)")
     ax.set_ylabel("Count")
-    ax.set_title("Training Data: Demand Distribution\n(Used for Static P90 and extreme threshold computation)")
+    ax.set_title("Training Data: Demand Distribution\n"
+                 "(P90 → Static_P90 constant; P99 → extreme event threshold)")
     ax.legend()
-    ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda x, p: f"{x/1e3:.0f}K"))
+    ax.xaxis.set_major_formatter(
+        mticker.FuncFormatter(lambda v, _: f"{v/1e3:.0f}K"))
 
     plt.tight_layout()
     path = os.path.join(GRAPHS_DIR, "demand_distribution.png")
@@ -226,16 +234,13 @@ def plot_demand_distribution(train_df):
 
 
 def plot_baseline_vs_actual(all_results):
-    """Multi-panel: predicted vs actual for each model over a representative window."""
+    """Multi-panel: provisioned vs actual for each model, representative window."""
     models = list(all_results.keys())
     n_models = len(models)
 
-    # Choose a representative 500-timestep window from the test set
-    # Pick a window that contains some extreme events for visual interest
     first_results = all_results[models[0]]
     extreme_indices = np.where(first_results["is_extreme"].values)[0]
     if len(extreme_indices) > 0:
-        # Center the window around the first extreme event
         center = extreme_indices[len(extreme_indices) // 4]
         start = max(0, center - 250)
         end = min(len(first_results), start + 500)
@@ -243,7 +248,8 @@ def plot_baseline_vs_actual(all_results):
         start = len(first_results) // 4
         end = start + 500
 
-    fig, axes = plt.subplots(n_models, 1, figsize=(14, 3.5 * n_models), sharex=True)
+    fig, axes = plt.subplots(n_models, 1,
+                             figsize=(14, 3.2 * n_models), sharex=True)
 
     for i, model_name in enumerate(models):
         ax = axes[i]
@@ -253,25 +259,25 @@ def plot_baseline_vs_actual(all_results):
         ax.plot(window["timestamp"], window["actual_demand"],
                 color="#333333", linewidth=0.8, alpha=0.8, label="Actual demand")
         ax.plot(window["timestamp"], window["provisioned"],
-                color=COLORS.get(model_name, "#999999"), linewidth=0.8, alpha=0.8,
-                label=f"{model_name} provisioned")
+                color=COLORS.get(model_name, "#999999"), linewidth=0.8,
+                alpha=0.85, label=f"{model_name} provisioned")
 
-        # Shade cold starts (under-provisioned)
         cold_mask = window["cold_starts"] > 0
         if cold_mask.any():
             ax.fill_between(window["timestamp"],
-                          window["provisioned"], window["actual_demand"],
-                          where=cold_mask, color=COLD_COLOR, alpha=0.3,
-                          label="Cold starts")
+                            window["provisioned"], window["actual_demand"],
+                            where=cold_mask, color=COLD_COLOR, alpha=0.3,
+                            label="Cold starts")
 
         ax.set_ylabel("Concurrency")
-        ax.set_title(f"{model_name}", fontsize=11, fontweight="bold")
-        ax.legend(loc="upper right", fontsize=8)
-        ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, p: f"{x/1e3:.0f}K"))
+        ax.set_title(f"{model_name}", fontsize=10, fontweight="bold")
+        ax.legend(loc="upper right", fontsize=7)
+        ax.yaxis.set_major_formatter(
+            mticker.FuncFormatter(lambda v, _: f"{v/1e3:.0f}K"))
 
     axes[-1].set_xlabel("Time")
     plt.suptitle("Provisioned vs Actual Demand (representative test window)",
-                 fontsize=14, fontweight="bold", y=1.01)
+                 fontsize=13, fontweight="bold")
     plt.xticks(rotation=45)
     plt.tight_layout()
 
@@ -282,32 +288,32 @@ def plot_baseline_vs_actual(all_results):
 
 
 def plot_cold_start_timeline(all_results):
-    """Multi-panel: cold start occurrences over time for each model."""
+    """Multi-panel: cold start magnitude over time per model."""
     models = list(all_results.keys())
     n_models = len(models)
 
-    fig, axes = plt.subplots(n_models, 1, figsize=(14, 2.5 * n_models), sharex=True)
+    fig, axes = plt.subplots(n_models, 1,
+                             figsize=(14, 2.3 * n_models), sharex=True)
 
     for i, model_name in enumerate(models):
         ax = axes[i]
         results = all_results[model_name]
-
         cold = results["cold_starts"].values
         timestamps = results["timestamp"]
+        color = COLORS.get(model_name, "#999999")
 
-        # Plot cold starts as vertical bars
-        ax.bar(timestamps, cold, width=0.04, color=COLORS.get(model_name, "#999999"),
-               alpha=0.7)
-
+        ax.bar(timestamps, cold, width=0.04, color=color, alpha=0.75)
         ax.set_ylabel("Cold Starts")
-        ax.set_title(f"{model_name} (total: {cold.sum():,.0f}, "
-                     f"rate: {(cold > 0).mean():.2%})",
-                     fontsize=10, fontweight="bold")
-        ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, p: f"{x/1e3:.0f}K"))
+        ax.set_title(f"{model_name}  "
+                     f"(total={cold.sum()/1e6:.1f}M,  "
+                     f"timesteps affected={(cold > 0).mean():.1%})",
+                     fontsize=9, fontweight="bold")
+        ax.yaxis.set_major_formatter(
+            mticker.FuncFormatter(lambda v, _: f"{v/1e3:.0f}K"))
 
     axes[-1].set_xlabel("Time")
     plt.suptitle("Cold Start Timeline: Where Under-Provisioning Occurs",
-                 fontsize=14, fontweight="bold", y=1.01)
+                 fontsize=13, fontweight="bold")
     plt.xticks(rotation=45)
     plt.tight_layout()
 
@@ -318,30 +324,46 @@ def plot_cold_start_timeline(all_results):
 
 
 def plot_prediction_error_distribution(all_results):
-    """Histogram of prediction errors for each model."""
+    """2-row grid of prediction-error histograms, one panel per model."""
     models = list(all_results.keys())
-    n_models = len(models)
+    n = len(models)
+    ncols = 3
+    nrows = (n + ncols - 1) // ncols   # ceil division
 
-    fig, axes = plt.subplots(1, n_models, figsize=(4 * n_models, 5), sharey=True)
+    fig, axes = plt.subplots(nrows, ncols,
+                             figsize=(5 * ncols, 4.5 * nrows),
+                             sharey=False)
+    axes_flat = axes.flatten()
 
     for i, model_name in enumerate(models):
-        ax = axes[i]
+        ax = axes_flat[i]
         results = all_results[model_name]
-
         error = results["predicted"] - results["actual_demand"]
-        ax.hist(error, bins=60, color=COLORS.get(model_name, "#999999"),
-                alpha=0.7, edgecolor="white", linewidth=0.3)
+        color = COLORS.get(model_name, "#999999")
+
+        ax.hist(error, bins=60, color=color, alpha=0.7,
+                edgecolor="white", linewidth=0.3)
         ax.axvline(x=0, color="black", linestyle="-", linewidth=1)
-        ax.axvline(x=error.mean(), color="red", linestyle="--", linewidth=1,
-                   label=f"Mean = {error.mean():,.0f}")
-        ax.set_xlabel("Prediction Error\n(predicted - actual)")
+        ax.axvline(x=error.mean(), color="red", linestyle="--", linewidth=1.2,
+                   label=f"Mean={error.mean()/1e3:+.0f}K")
+        ax.set_xlabel("Prediction Error (predicted − actual)")
         ax.set_title(f"{model_name}", fontsize=11, fontweight="bold")
         ax.legend(fontsize=8)
-        ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda x, p: f"{x/1e3:.0f}K"))
+        ax.xaxis.set_major_formatter(
+            mticker.FuncFormatter(lambda v, _: f"{v/1e3:.0f}K"))
 
-    axes[0].set_ylabel("Count")
-    plt.suptitle("Prediction Error Distribution\n(negative = under-provision = cold starts)",
-                 fontsize=13, fontweight="bold")
+    # Hide any unused subplot panels
+    for j in range(n, len(axes_flat)):
+        axes_flat[j].set_visible(False)
+
+    axes_flat[0].set_ylabel("Count")
+    if nrows > 1:
+        axes_flat[ncols].set_ylabel("Count")
+
+    plt.suptitle("Prediction Error Distribution\n"
+                 "(negative = under-provision = cold starts; "
+                 "positive = over-provision = idle waste)",
+                 fontsize=12, fontweight="bold")
     plt.tight_layout()
 
     path = os.path.join(GRAPHS_DIR, "prediction_error_distribution.png")
@@ -357,11 +379,10 @@ def main():
 
     os.makedirs(GRAPHS_DIR, exist_ok=True)
 
-    # Load data
     print("\nLoading results...")
     all_metrics, all_results, train_df = load_data()
+    print(f"  Models found: {list(all_metrics.keys())}")
 
-    # Generate all graphs
     print("\nGenerating graphs...")
     plot_cost_comparison(all_metrics)
     plot_sla_comparison(all_metrics)
