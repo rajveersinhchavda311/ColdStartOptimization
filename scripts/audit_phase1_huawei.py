@@ -248,7 +248,7 @@ def main():
         "total_checks": total_checks,
         "passed": passed,
         "failed": total_checks - passed,
-        "pass_rate": passed / total_checks if total_checks > 0 else 0,
+        "overall": "PASS" if passed == total_checks else "FAIL",
         "checks": audit_log,
     }
     out_path = os.path.join(RESULTS_DIR, "audit_results.json")

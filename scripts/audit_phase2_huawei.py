@@ -355,7 +355,7 @@ def main():
         "total_checks": total_checks,
         "passed": passed,
         "failed": total_checks - passed,
-        "pass_rate": passed / total_checks if total_checks > 0 else 0,
+        "overall": "PASS" if passed == total_checks else "FAIL",
         "expected_failures_noted": len(xfails),
         "unexpected_failures": len(failures),
         "known_failures_reference": (
