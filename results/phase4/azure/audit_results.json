@@ -1,0 +1,323 @@
+{
+  "total_checks": 63,
+  "passed": 63,
+  "failed": 0,
+  "overall": "PASS",
+  "checks": [
+    {
+      "name": "Phase 4 condition diagnostics exist",
+      "status": "PASS",
+      "detail": "Found 6 files in C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase4\\azure\\conditions"
+    },
+    {
+      "name": "All C1-C3 conditions use identical test demands",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Test set has 3,744 timesteps",
+      "status": "PASS",
+      "detail": "got 3744"
+    },
+    {
+      "name": "summary.csv exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "C0 row found for Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Reactive] C0 SLA == Phase 1 (exact)",
+      "status": "PASS",
+      "detail": "diff=1.11e-16"
+    },
+    {
+      "name": "[Reactive] C0 Cost == Phase 1 (exact)",
+      "status": "PASS",
+      "detail": "diff=0.0"
+    },
+    {
+      "name": "C4 row found for Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[Reactive] C4 SLA == Phase 2 (tol=1e-10)",
+      "status": "PASS",
+      "detail": "p4=0.99964497  p2=0.99964497  diff=1.11e-16"
+    },
+    {
+      "name": "[Reactive] C4 Cost == Phase 2 (tol=1)",
+      "status": "PASS",
+      "detail": "p4=446,556,913  p2=446,556,913  diff=0"
+    },
+    {
+      "name": "C0 row found for TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[TCN] C0 SLA == Phase 1 (exact)",
+      "status": "PASS",
+      "detail": "diff=1.11e-16"
+    },
+    {
+      "name": "[TCN] C0 Cost == Phase 1 (exact)",
+      "status": "PASS",
+      "detail": "diff=0.0"
+    },
+    {
+      "name": "C4 row found for TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[TCN] C4 SLA == Phase 2 (tol=1e-04)",
+      "status": "PASS",
+      "detail": "p4=0.99969562  p2=0.99969562  diff=1.11e-16"
+    },
+    {
+      "name": "[TCN] C4 Cost == Phase 2 (tol=1,000,000)",
+      "status": "PASS",
+      "detail": "p4=342,367,156  p2=342,367,156  diff=0"
+    },
+    {
+      "name": "[C1_static_gaussian Reactive] sigma_t is constant (std==0)",
+      "status": "PASS",
+      "detail": "std(sigma_t) = 3.637979e-12"
+    },
+    {
+      "name": "[C1_static_gaussian Reactive] sigma_t == sigma_train = 30,283",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[C1_static_gaussian TCN] sigma_t is constant (std==0)",
+      "status": "PASS",
+      "detail": "std(sigma_t) = 3.637979e-12"
+    },
+    {
+      "name": "[C1_static_gaussian TCN] sigma_t == sigma_train = 22,536",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[C3_static_evt Reactive] sigma_t is constant (std==0)",
+      "status": "PASS",
+      "detail": "std(sigma_t) = 3.637979e-12"
+    },
+    {
+      "name": "[C3_static_evt Reactive] sigma_t == sigma_train = 30,283",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[C3_static_evt TCN] sigma_t is constant (std==0)",
+      "status": "PASS",
+      "detail": "std(sigma_t) = 3.637979e-12"
+    },
+    {
+      "name": "[C3_static_evt TCN] sigma_t == sigma_train = 22,536",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "[C2 Reactive] sigma warm-up: first 30 values == sigma_train",
+      "status": "PASS",
+      "detail": "max deviation = 0.00e+00"
+    },
+    {
+      "name": "[C2 Reactive] sigma_t varies after warm-up (>1 distinct value)",
+      "status": "PASS",
+      "detail": "distinct values in post-warmup: 3714"
+    },
+    {
+      "name": "[C2 TCN] sigma warm-up: first 30 values == sigma_train",
+      "status": "PASS",
+      "detail": "max deviation = 0.00e+00"
+    },
+    {
+      "name": "[C2 TCN] sigma_t varies after warm-up (>1 distinct value)",
+      "status": "PASS",
+      "detail": "distinct values in post-warmup: 3714"
+    },
+    {
+      "name": "[C1_static_gaussian Reactive] cvar_col == K_GAUSSIAN (max dev < 1e-10)",
+      "status": "PASS",
+      "detail": "max deviation = 0.00e+00"
+    },
+    {
+      "name": "[C1_static_gaussian TCN] cvar_col == K_GAUSSIAN (max dev < 1e-10)",
+      "status": "PASS",
+      "detail": "max deviation = 0.00e+00"
+    },
+    {
+      "name": "[C2_dynamic_gaussian Reactive] cvar_col == K_GAUSSIAN (max dev < 1e-10)",
+      "status": "PASS",
+      "detail": "max deviation = 0.00e+00"
+    },
+    {
+      "name": "[C2_dynamic_gaussian TCN] cvar_col == K_GAUSSIAN (max dev < 1e-10)",
+      "status": "PASS",
+      "detail": "max deviation = 0.00e+00"
+    },
+    {
+      "name": "[C3 Reactive] cvar_col is constant (EVT CVaR_z is fixed)",
+      "status": "PASS",
+      "detail": "unique values: [4.16049949]"
+    },
+    {
+      "name": "[C3 Reactive] CVaR_z > K_GAUSSIAN (2.6652): EVT gives 4.1605 (heavy-tail effect)",
+      "status": "PASS",
+      "detail": "CVaR_z=4.1605 is not > K_GAUSSIAN=2.6652"
+    },
+    {
+      "name": "[Reactive] Phase 2 EVT xi < 1 (finite CVaR): xi=-0.0928",
+      "status": "PASS",
+      "detail": "xi=-0.0928 >= 1 would imply infinite CVaR"
+    },
+    {
+      "name": "[C3 TCN] cvar_col is constant (EVT CVaR_z is fixed)",
+      "status": "PASS",
+      "detail": "unique values: [4.29492294]"
+    },
+    {
+      "name": "[C3 TCN] CVaR_z > K_GAUSSIAN (2.6652): EVT gives 4.2949 (heavy-tail effect)",
+      "status": "PASS",
+      "detail": "CVaR_z=4.2949 is not > K_GAUSSIAN=2.6652"
+    },
+    {
+      "name": "[TCN] Phase 2 EVT xi < 1 (finite CVaR): xi=0.0222",
+      "status": "PASS",
+      "detail": "xi=0.0222 >= 1 would imply infinite CVaR"
+    },
+    {
+      "name": "[C1_static_gaussian Reactive] buffer is constant (CV < 1e-8)",
+      "status": "PASS",
+      "detail": "CV = 0.000000e+00"
+    },
+    {
+      "name": "[C1_static_gaussian TCN] buffer is constant (CV < 1e-8)",
+      "status": "PASS",
+      "detail": "CV = 1.211356e-16"
+    },
+    {
+      "name": "[C3_static_evt Reactive] buffer is constant (CV < 1e-8)",
+      "status": "PASS",
+      "detail": "CV = 2.309963e-16"
+    },
+    {
+      "name": "[C3_static_evt TCN] buffer is constant (CV < 1e-8)",
+      "status": "PASS",
+      "detail": "CV = 0.000000e+00"
+    },
+    {
+      "name": "[C2 Reactive] buffer varies (CV > 0.01)",
+      "status": "PASS",
+      "detail": "CV = 0.2076"
+    },
+    {
+      "name": "[C2 TCN] buffer varies (CV > 0.01)",
+      "status": "PASS",
+      "detail": "CV = 0.2613"
+    },
+    {
+      "name": "[C1_static_gaussian Reactive] Accounting: no neg, mutual excl., cold == max(d-p, 0)",
+      "status": "PASS",
+      "detail": "neg=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[C1_static_gaussian TCN] Accounting: no neg, mutual excl., cold == max(d-p, 0)",
+      "status": "PASS",
+      "detail": "neg=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[C2_dynamic_gaussian Reactive] Accounting: no neg, mutual excl., cold == max(d-p, 0)",
+      "status": "PASS",
+      "detail": "neg=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[C2_dynamic_gaussian TCN] Accounting: no neg, mutual excl., cold == max(d-p, 0)",
+      "status": "PASS",
+      "detail": "neg=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[C3_static_evt Reactive] Accounting: no neg, mutual excl., cold == max(d-p, 0)",
+      "status": "PASS",
+      "detail": "neg=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "[C3_static_evt TCN] Accounting: no neg, mutual excl., cold == max(d-p, 0)",
+      "status": "PASS",
+      "detail": "neg=False  both_pos=False  accounting=False"
+    },
+    {
+      "name": "File exists (not deleted): results\\phase1\\azure\\metrics.json",
+      "status": "PASS",
+      "detail": "missing: C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase1\\azure\\metrics.json"
+    },
+    {
+      "name": "File non-empty: results\\phase1\\azure\\metrics.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "File exists (not deleted): results\\phase1\\azure\\comparison.csv",
+      "status": "PASS",
+      "detail": "missing: C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase1\\azure\\comparison.csv"
+    },
+    {
+      "name": "File non-empty: results\\phase1\\azure\\comparison.csv",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "File exists (not deleted): results\\phase2\\azure\\metrics.json",
+      "status": "PASS",
+      "detail": "missing: C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase2\\azure\\metrics.json"
+    },
+    {
+      "name": "File non-empty: results\\phase2\\azure\\metrics.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "File exists (not deleted): results\\phase2\\azure\\comparison.csv",
+      "status": "PASS",
+      "detail": "missing: C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase2\\azure\\comparison.csv"
+    },
+    {
+      "name": "File non-empty: results\\phase2\\azure\\comparison.csv",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "File exists (not deleted): results\\phase3\\azure\\summary_3a.csv",
+      "status": "PASS",
+      "detail": "missing: C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase3\\azure\\summary_3a.csv"
+    },
+    {
+      "name": "File non-empty: results\\phase3\\azure\\summary_3a.csv",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "File exists (not deleted): results\\phase3\\azure\\summary_3b.csv",
+      "status": "PASS",
+      "detail": "missing: C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase3\\azure\\summary_3b.csv"
+    },
+    {
+      "name": "File non-empty: results\\phase3\\azure\\summary_3b.csv",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "RESULTS_DIR is results/phase4/ (not phase1/2/3)",
+      "status": "PASS",
+      "detail": "C:\\Users\\rajveersinh chavda\\Documents\\ColdStartOptimization3\\ColdStartOptimization\\results\\phase4\\azure"
+    }
+  ]
+}
