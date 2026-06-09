@@ -1,0 +1,638 @@
+{
+  "total_checks": 126,
+  "passed": 126,
+  "failed": 0,
+  "pass_rate": 1.0,
+  "checks": [
+    {
+      "name": "Train has lag_1440 column",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Val has lag_1440 column",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Test has lag_1440 column",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "lag_1440 non-null in train",
+      "status": "PASS",
+      "detail": "Burn-in not applied correctly"
+    },
+    {
+      "name": "lag_1440 non-null in val",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "lag_1440 non-null in test",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Train precedes val chronologically",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Val precedes test chronologically",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Train size = 25920",
+      "status": "PASS",
+      "detail": "Got 25920"
+    },
+    {
+      "name": "Val size = 8640",
+      "status": "PASS",
+      "detail": "Got 8640"
+    },
+    {
+      "name": "Test size = 8640",
+      "status": "PASS",
+      "detail": "Got 8640"
+    },
+    {
+      "name": "Test demands identical: Reactive vs Static_P90",
+      "status": "PASS",
+      "detail": "Max diff = 0.00"
+    },
+    {
+      "name": "Test demands identical: Reactive vs Forecast_Only",
+      "status": "PASS",
+      "detail": "Max diff = 0.00"
+    },
+    {
+      "name": "Test demands identical: Reactive vs Seasonal_Naive",
+      "status": "PASS",
+      "detail": "Max diff = 0.00"
+    },
+    {
+      "name": "Test demands identical: Reactive vs Linear_Seasonal",
+      "status": "PASS",
+      "detail": "Max diff = 0.00"
+    },
+    {
+      "name": "Test demands identical: Reactive vs TCN",
+      "status": "PASS",
+      "detail": "Max diff = 0.00"
+    },
+    {
+      "name": "Test demands match raw test.csv",
+      "status": "PASS",
+      "detail": "Max diff = 0.00"
+    },
+    {
+      "name": "Cold accounting: Reactive",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "Idle accounting: Reactive",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "Cold accounting: Static_P90",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "Idle accounting: Static_P90",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "Cold accounting: Forecast_Only",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "Idle accounting: Forecast_Only",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "Cold accounting: Seasonal_Naive",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "Idle accounting: Seasonal_Naive",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "Cold accounting: Linear_Seasonal",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "Idle accounting: Linear_Seasonal",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "Cold accounting: TCN",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "Idle accounting: TCN",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000"
+    },
+    {
+      "name": "cold_starts >= 0: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "idle_capacity >= 0: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "provisioned >= 0: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "cold_starts >= 0: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "idle_capacity >= 0: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "provisioned >= 0: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "cold_starts >= 0: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "idle_capacity >= 0: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "provisioned >= 0: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "cold_starts >= 0: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "idle_capacity >= 0: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "provisioned >= 0: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "cold_starts >= 0: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "idle_capacity >= 0: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "provisioned >= 0: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "cold_starts >= 0: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "idle_capacity >= 0: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "provisioned >= 0: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No timestep with both cold & idle: Reactive",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
+      "name": "No timestep with both cold & idle: Static_P90",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
+      "name": "No timestep with both cold & idle: Forecast_Only",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
+      "name": "No timestep with both cold & idle: Seasonal_Naive",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
+      "name": "No timestep with both cold & idle: Linear_Seasonal",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
+      "name": "No timestep with both cold & idle: TCN",
+      "status": "PASS",
+      "detail": "0 violations found"
+    },
+    {
+      "name": "Threshold = P99(train concurrency)",
+      "status": "PASS",
+      "detail": "Computed=728.81, Saved=729.00"
+    },
+    {
+      "name": "No NaN in actual_demand: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in actual_demand: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in predicted: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in predicted: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in provisioned: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in provisioned: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cold_starts: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cold_starts: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in idle_capacity: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in idle_capacity: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cost: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cost: Reactive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in actual_demand: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in actual_demand: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in predicted: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in predicted: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in provisioned: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in provisioned: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cold_starts: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cold_starts: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in idle_capacity: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in idle_capacity: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cost: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cost: Static_P90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in actual_demand: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in actual_demand: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in predicted: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in predicted: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in provisioned: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in provisioned: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cold_starts: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cold_starts: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in idle_capacity: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in idle_capacity: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cost: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cost: Forecast_Only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in actual_demand: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in actual_demand: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in predicted: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in predicted: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in provisioned: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in provisioned: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cold_starts: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cold_starts: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in idle_capacity: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in idle_capacity: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cost: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cost: Seasonal_Naive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in actual_demand: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in actual_demand: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in predicted: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in predicted: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in provisioned: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in provisioned: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cold_starts: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cold_starts: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in idle_capacity: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in idle_capacity: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cost: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cost: Linear_Seasonal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in actual_demand: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in actual_demand: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in predicted: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in predicted: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in provisioned: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in provisioned: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cold_starts: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cold_starts: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in idle_capacity: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in idle_capacity: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No NaN in cost: TCN",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Inf in cost: TCN",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

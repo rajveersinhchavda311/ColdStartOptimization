@@ -1,0 +1,72 @@
+{
+  "RiskAware(Reactive)": {
+    "threshold_u": 1.2407266382256192,
+    "threshold_percentile": 90,
+    "n_total": 25920,
+    "n_exceedances": 2580,
+    "exceedance_prob": 0.09953703703703703,
+    "xi": -0.07230001426229865,
+    "beta": 0.8816506386714582,
+    "var": 3.107356999680973,
+    "cvar_z": 3.8037043157159287,
+    "alpha": 0.99,
+    "cvar_z_over_k_gaussian": 1.4271664493904757,
+    "k_gaussian": 2.665214220345806
+  },
+  "RiskAware(Forecast_Only)": {
+    "threshold_u": 1.3442720961990537,
+    "threshold_percentile": 90,
+    "n_total": 25920,
+    "n_exceedances": 2592,
+    "exceedance_prob": 0.1,
+    "xi": -0.04402455197777628,
+    "beta": 1.171647375157463,
+    "var": 3.90985628178618,
+    "cvar_z": 4.923911630216586,
+    "alpha": 0.99,
+    "cvar_z_over_k_gaussian": 1.8474731196570455,
+    "k_gaussian": 2.665214220345806
+  },
+  "RiskAware(Seasonal_Naive)": {
+    "threshold_u": 0.7821747673007132,
+    "threshold_percentile": 90,
+    "n_total": 25920,
+    "n_exceedances": 2563,
+    "exceedance_prob": 0.09888117283950618,
+    "xi": 0.31937996300854876,
+    "beta": 0.5579302457155821,
+    "var": 2.666804206501758,
+    "cvar_z": 4.370902033858259,
+    "alpha": 0.99,
+    "cvar_z_over_k_gaussian": 1.6399815071117039,
+    "k_gaussian": 2.665214220345806
+  },
+  "RiskAware(Linear_Seasonal)": {
+    "threshold_u": 0.9836720055762366,
+    "threshold_percentile": 90,
+    "n_total": 25920,
+    "n_exceedances": 2592,
+    "exceedance_prob": 0.1,
+    "xi": 0.2417271332732127,
+    "beta": 0.6748785786482514,
+    "var": 3.0628732403857843,
+    "cvar_z": 4.615715211007349,
+    "alpha": 0.99,
+    "cvar_z_over_k_gaussian": 1.731836478948574,
+    "k_gaussian": 2.665214220345806
+  },
+  "RiskAware(TCN)": {
+    "threshold_u": 0.8906030567662258,
+    "threshold_percentile": 90,
+    "n_total": 25920,
+    "n_exceedances": 2592,
+    "exceedance_prob": 0.1,
+    "xi": 0.27797895635231057,
+    "beta": 0.7808580788012456,
+    "var": 3.4092408322727925,
+    "cvar_z": 5.460408720100608,
+    "alpha": 0.99,
+    "cvar_z_over_k_gaussian": 2.0487691677527264,
+    "k_gaussian": 2.665214220345806
+  }
+}

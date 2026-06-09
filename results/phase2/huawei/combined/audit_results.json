@@ -1,0 +1,737 @@
+{
+  "total_checks": 121,
+  "passed": 121,
+  "failed": 0,
+  "pass_rate": 1.0,
+  "expected_failures_noted": 0,
+  "unexpected_failures": 0,
+  "known_failures_reference": "On Azure Phase 2, RiskAware(Forecast_Only) and RiskAware(Seasonal_Naive) failed 'buffer larger during extremes' because their base predictions track the seasonal cycle (lag_1440), causing residuals to be smaller during demand spikes (which are partially captured by the seasonal component). These are marked XFAIL and documented, not suppressed.",
+  "checks": [
+    {
+      "name": "Test demands identical: RiskAware(Reactive) vs RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "Max diff = 0.00",
+      "expected_fail": false
+    },
+    {
+      "name": "Test demands identical: RiskAware(Reactive) vs RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "Max diff = 0.00",
+      "expected_fail": false
+    },
+    {
+      "name": "Test demands identical: RiskAware(Reactive) vs RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "Max diff = 0.00",
+      "expected_fail": false
+    },
+    {
+      "name": "Test demands identical: RiskAware(Reactive) vs RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "Max diff = 0.00",
+      "expected_fail": false
+    },
+    {
+      "name": "Test demands match raw test.csv",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "First 30 sigma_t constant (warm-up): RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "std_of_first_W = 0.000000 (should be ~0)",
+      "expected_fail": false
+    },
+    {
+      "name": "First 30 sigma_t constant (warm-up): RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "std_of_first_W = 0.000000 (should be ~0)",
+      "expected_fail": false
+    },
+    {
+      "name": "First 30 sigma_t constant (warm-up): RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "std_of_first_W = 0.000000 (should be ~0)",
+      "expected_fail": false
+    },
+    {
+      "name": "First 30 sigma_t constant (warm-up): RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "std_of_first_W = 0.000000 (should be ~0)",
+      "expected_fail": false
+    },
+    {
+      "name": "First 30 sigma_t constant (warm-up): RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "std_of_first_W = 0.000000 (should be ~0)",
+      "expected_fail": false
+    },
+    {
+      "name": "Buffer CV > 0.01 (dynamic): RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "CV = 0.3870",
+      "expected_fail": false
+    },
+    {
+      "name": "Buffer CV > 0.01 (dynamic): RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "CV = 0.5011",
+      "expected_fail": false
+    },
+    {
+      "name": "Buffer CV > 0.01 (dynamic): RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "CV = 1.0849",
+      "expected_fail": false
+    },
+    {
+      "name": "Buffer CV > 0.01 (dynamic): RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "CV = 0.9715",
+      "expected_fail": false
+    },
+    {
+      "name": "Buffer CV > 0.01 (dynamic): RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "CV = 1.0128",
+      "expected_fail": false
+    },
+    {
+      "name": "evt_parameters.json loaded",
+      "status": "PASS",
+      "detail": "File missing or empty",
+      "expected_fail": false
+    },
+    {
+      "name": "CVaR_z > 0: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "cvar_z = 3.8037043157159287",
+      "expected_fail": false
+    },
+    {
+      "name": "xi in [-1, 2]: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "xi = -0.07230001426229865",
+      "expected_fail": false
+    },
+    {
+      "name": "beta > 0: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "beta = 0.8816506386714582",
+      "expected_fail": false
+    },
+    {
+      "name": "ratio = cvar_z / K_GAUSSIAN present: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "Key missing",
+      "expected_fail": false
+    },
+    {
+      "name": "CVaR_z > 0: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "cvar_z = 4.923911630216586",
+      "expected_fail": false
+    },
+    {
+      "name": "xi in [-1, 2]: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "xi = -0.04402455197777628",
+      "expected_fail": false
+    },
+    {
+      "name": "beta > 0: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "beta = 1.171647375157463",
+      "expected_fail": false
+    },
+    {
+      "name": "ratio = cvar_z / K_GAUSSIAN present: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "Key missing",
+      "expected_fail": false
+    },
+    {
+      "name": "CVaR_z > 0: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "cvar_z = 4.370902033858259",
+      "expected_fail": false
+    },
+    {
+      "name": "xi in [-1, 2]: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "xi = 0.31937996300854876",
+      "expected_fail": false
+    },
+    {
+      "name": "beta > 0: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "beta = 0.5579302457155821",
+      "expected_fail": false
+    },
+    {
+      "name": "ratio = cvar_z / K_GAUSSIAN present: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "Key missing",
+      "expected_fail": false
+    },
+    {
+      "name": "CVaR_z > 0: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "cvar_z = 4.615715211007349",
+      "expected_fail": false
+    },
+    {
+      "name": "xi in [-1, 2]: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "xi = 0.2417271332732127",
+      "expected_fail": false
+    },
+    {
+      "name": "beta > 0: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "beta = 0.6748785786482514",
+      "expected_fail": false
+    },
+    {
+      "name": "ratio = cvar_z / K_GAUSSIAN present: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "Key missing",
+      "expected_fail": false
+    },
+    {
+      "name": "CVaR_z > 0: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "cvar_z = 5.460408720100608",
+      "expected_fail": false
+    },
+    {
+      "name": "xi in [-1, 2]: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "xi = 0.27797895635231057",
+      "expected_fail": false
+    },
+    {
+      "name": "beta > 0: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "beta = 0.7808580788012456",
+      "expected_fail": false
+    },
+    {
+      "name": "ratio = cvar_z / K_GAUSSIAN present: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "Key missing",
+      "expected_fail": false
+    },
+    {
+      "name": "Cold accounting: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000",
+      "expected_fail": false
+    },
+    {
+      "name": "Idle accounting: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "Cold accounting: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000",
+      "expected_fail": false
+    },
+    {
+      "name": "Idle accounting: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "Cold accounting: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000",
+      "expected_fail": false
+    },
+    {
+      "name": "Idle accounting: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "Cold accounting: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000",
+      "expected_fail": false
+    },
+    {
+      "name": "Idle accounting: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "Cold accounting: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "Max diff = 0.000000",
+      "expected_fail": false
+    },
+    {
+      "name": "Idle accounting: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No timestep with both cold & idle: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "0 violations",
+      "expected_fail": false
+    },
+    {
+      "name": "No timestep with both cold & idle: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "0 violations",
+      "expected_fail": false
+    },
+    {
+      "name": "No timestep with both cold & idle: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "0 violations",
+      "expected_fail": false
+    },
+    {
+      "name": "No timestep with both cold & idle: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "0 violations",
+      "expected_fail": false
+    },
+    {
+      "name": "No timestep with both cold & idle: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "0 violations",
+      "expected_fail": false
+    },
+    {
+      "name": "buffer_t >= 0 throughout: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "Min buffer = 342.4880",
+      "expected_fail": false
+    },
+    {
+      "name": "buffer_t >= 0 throughout: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "Min buffer = 320.2255",
+      "expected_fail": false
+    },
+    {
+      "name": "buffer_t >= 0 throughout: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "Min buffer = 73.8338",
+      "expected_fail": false
+    },
+    {
+      "name": "buffer_t >= 0 throughout: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "Min buffer = 106.0153",
+      "expected_fail": false
+    },
+    {
+      "name": "buffer_t >= 0 throughout: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "Min buffer = 116.7403",
+      "expected_fail": false
+    },
+    {
+      "name": "Buffer larger during extremes: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "mean_buf_all=664.0  mean_buf_ext=850.3  n_extreme=151",
+      "expected_fail": false
+    },
+    {
+      "name": "Buffer larger during extremes: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "mean_buf_all=620.4  mean_buf_ext=812.7  n_extreme=151",
+      "expected_fail": true
+    },
+    {
+      "name": "Buffer larger during extremes: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "mean_buf_all=379.7  mean_buf_ext=635.6  n_extreme=151",
+      "expected_fail": true
+    },
+    {
+      "name": "Buffer larger during extremes: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "mean_buf_all=380.9  mean_buf_ext=633.5  n_extreme=151",
+      "expected_fail": false
+    },
+    {
+      "name": "Buffer larger during extremes: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "mean_buf_all=390.9  mean_buf_ext=680.2  n_extreme=151",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in actual_demand: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in actual_demand: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in predicted: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in predicted: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in provisioned: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in provisioned: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in cold_starts: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in cold_starts: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in idle_capacity: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in idle_capacity: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in buffer_t: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in buffer_t: RiskAware(Reactive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in actual_demand: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in actual_demand: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in predicted: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in predicted: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in provisioned: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in provisioned: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in cold_starts: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in cold_starts: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in idle_capacity: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in idle_capacity: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in buffer_t: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in buffer_t: RiskAware(Forecast_Only)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in actual_demand: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in actual_demand: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in predicted: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in predicted: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in provisioned: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in provisioned: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in cold_starts: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in cold_starts: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in idle_capacity: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in idle_capacity: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in buffer_t: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in buffer_t: RiskAware(Seasonal_Naive)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in actual_demand: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in actual_demand: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in predicted: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in predicted: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in provisioned: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in provisioned: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in cold_starts: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in cold_starts: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in idle_capacity: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in idle_capacity: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in buffer_t: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in buffer_t: RiskAware(Linear_Seasonal)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in actual_demand: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in actual_demand: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in predicted: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in predicted: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in provisioned: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in provisioned: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in cold_starts: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in cold_starts: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in idle_capacity: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in idle_capacity: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No NaN in buffer_t: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    },
+    {
+      "name": "No Inf in buffer_t: RiskAware(TCN)",
+      "status": "PASS",
+      "detail": "",
+      "expected_fail": false
+    }
+  ]
+}

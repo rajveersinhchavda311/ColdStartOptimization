@@ -1,0 +1,140 @@
+{
+  "Reactive": {
+    "total_cost": 5452612.0,
+    "cold_cost": 4956830.0,
+    "idle_cost": 495782.0,
+    "total_cold_starts": 495683,
+    "total_idle_capacity": 495782,
+    "total_demand": 2495264,
+    "request_sla": 0.801350478346179,
+    "extreme_sla": 0.3749627291701514,
+    "cold_start_rate": 0.45775462962962965,
+    "avg_cold_per_step": 57.37071759259259,
+    "n_timesteps": 8640,
+    "n_extreme_timesteps": 151,
+    "demand_extreme_total": 137507,
+    "cold_extreme_total": 85947,
+    "cost_model": {
+      "c_cold": 10,
+      "c_idle": 1,
+      "note": "Experimental assumption, not from cloud pricing"
+    },
+    "fit_time_seconds": 0.0,
+    "sim_time_seconds": 0.0009999275207519531
+  },
+  "Static_P90": {
+    "total_cost": 3078645.0,
+    "cold_cost": 1697590.0,
+    "idle_cost": 1381055.0,
+    "total_cold_starts": 169759,
+    "total_idle_capacity": 1381055,
+    "total_demand": 2495264,
+    "request_sla": 0.9319675192685023,
+    "extreme_sla": 0.4710960169300472,
+    "cold_start_rate": 0.1193287037037037,
+    "avg_cold_per_step": 19.648032407407406,
+    "n_timesteps": 8640,
+    "n_extreme_timesteps": 151,
+    "demand_extreme_total": 137507,
+    "cold_extreme_total": 72728,
+    "cost_model": {
+      "c_cold": 10,
+      "c_idle": 1,
+      "note": "Experimental assumption, not from cloud pricing"
+    },
+    "fit_time_seconds": 0.0,
+    "sim_time_seconds": 0.0010004043579101562
+  },
+  "Forecast_Only": {
+    "total_cost": 4034968.0,
+    "cold_cost": 3664630.0,
+    "idle_cost": 370338.0,
+    "total_cold_starts": 366463,
+    "total_idle_capacity": 370338,
+    "total_demand": 2495264,
+    "request_sla": 0.8531365819408288,
+    "extreme_sla": 0.37022115237769715,
+    "cold_start_rate": 0.30671296296296297,
+    "avg_cold_per_step": 42.41469907407407,
+    "n_timesteps": 8640,
+    "n_extreme_timesteps": 151,
+    "demand_extreme_total": 137507,
+    "cold_extreme_total": 86599,
+    "cost_model": {
+      "c_cold": 10,
+      "c_idle": 1,
+      "note": "Experimental assumption, not from cloud pricing"
+    },
+    "fit_time_seconds": 0.0,
+    "sim_time_seconds": 0.0025348663330078125
+  },
+  "Seasonal_Naive": {
+    "total_cost": 2946203.0,
+    "cold_cost": 2680350.0,
+    "idle_cost": 265853.0,
+    "total_cold_starts": 268035,
+    "total_idle_capacity": 265853,
+    "total_demand": 2495264,
+    "request_sla": 0.8925825083037306,
+    "extreme_sla": 0.6355021926156487,
+    "cold_start_rate": 0.5048611111111111,
+    "avg_cold_per_step": 31.022569444444443,
+    "n_timesteps": 8640,
+    "n_extreme_timesteps": 151,
+    "demand_extreme_total": 137507,
+    "cold_extreme_total": 50121,
+    "cost_model": {
+      "c_cold": 10,
+      "c_idle": 1,
+      "note": "Experimental assumption, not from cloud pricing"
+    },
+    "fit_time_seconds": 0.0,
+    "sim_time_seconds": 0.0010073184967041016
+  },
+  "Linear_Seasonal": {
+    "total_cost": 3103044.0,
+    "cold_cost": 2878250.0,
+    "idle_cost": 224794.0,
+    "total_cold_starts": 287825,
+    "total_idle_capacity": 224794,
+    "total_demand": 2495264,
+    "request_sla": 0.8846514837708555,
+    "extreme_sla": 0.5637313009519516,
+    "cold_start_rate": 0.46967592592592594,
+    "avg_cold_per_step": 33.3130787037037,
+    "n_timesteps": 8640,
+    "n_extreme_timesteps": 151,
+    "demand_extreme_total": 137507,
+    "cold_extreme_total": 59990,
+    "cost_model": {
+      "c_cold": 10,
+      "c_idle": 1,
+      "note": "Experimental assumption, not from cloud pricing"
+    },
+    "fit_time_seconds": 0.01770329475402832,
+    "sim_time_seconds": 0.0009984970092773438
+  },
+  "TCN": {
+    "total_cost": 2469065.0,
+    "cold_cost": 2260640.0,
+    "idle_cost": 208425.0,
+    "total_cold_starts": 226064,
+    "total_idle_capacity": 208425,
+    "total_demand": 2495264,
+    "request_sla": 0.909402772612437,
+    "extreme_sla": 0.5894972619575731,
+    "cold_start_rate": 0.4375,
+    "avg_cold_per_step": 26.164814814814815,
+    "n_timesteps": 8640,
+    "n_extreme_timesteps": 151,
+    "demand_extreme_total": 137507,
+    "cold_extreme_total": 56447,
+    "cost_model": {
+      "c_cold": 10,
+      "c_idle": 1,
+      "note": "Experimental assumption, not from cloud pricing"
+    },
+    "fit_time_seconds": 195.32397270202637,
+    "sim_time_seconds": 0.1365203857421875
+  }
+}
