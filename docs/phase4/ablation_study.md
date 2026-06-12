@@ -294,7 +294,7 @@ tradeoff for the paper's claimed use case.
 
 Reading down the 2×2 heatmap (static → dynamic), cost decreases while SLA decreases slightly:
 - C1 → C2: Reactive 324M → 315M (−3%), SLA −0.05 pp; TCN 239M → 236M (−1%), SLA −0.04 pp
-- C3 → C4: Reactive 473M → 447M (−6%), SLA −0.03 pp; TCN 358M → 342M (−5%), SLA −0.02 pp
+- C3 → C4: Reactive 473M → 447M (−5.5%), SLA −0.03 pp; TCN 358M → 342M (−4.4%), SLA −0.02 pp
 
 The rolling window σ_t adapts downward during calm periods, reducing idle cost. This is the
 correct behavior economically — it avoids over-provisioning when the system is stable. The SLA
@@ -347,4 +347,3 @@ The heatmap is the primary paper figure for this phase:
 | Phase 3 | Sensitivity of EVT params | Confirms anchor params are robust; Phase 4 builds on this |
 | **Phase 4** | **Component ablation** | **This document** |
 | Phase 5 | Huawei generalization | Phase 4 explains *why* the method works; Phase 5 tests *where* it generalises |
-| Phase 6 | Paper consolidation | Phase 4 provides the mechanistic narrative |

@@ -2,7 +2,7 @@
   "total_checks": 126,
   "passed": 126,
   "failed": 0,
-  "pass_rate": 1.0,
+  "overall": "PASS",
   "checks": [
     {
       "name": "Train has lag_1440 column",

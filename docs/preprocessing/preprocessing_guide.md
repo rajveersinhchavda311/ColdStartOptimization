@@ -167,7 +167,8 @@ Same split ratio and burn-in logic applied to all 6 Huawei subdirectories (combi
 | Std dev | ~68,696 |
 | P90 | ~696,264 |
 | P99 (extreme threshold) | ~785,458 |
-| Test set max | ~1,258,768 (~1.6× P99) |
+| Max (train) | 1,258,768 |
+| Test set max | 866,343 (~1.10× P99) |
 
 ### Huawei (all values are invocations/min from training set)
 
@@ -180,9 +181,9 @@ Same split ratio and burn-in logic applied to all 6 Huawei subdirectories (combi
 | R4 | 32.1 | 28.9 | 46 | 164 | 420 | — |
 | R5 | 18.2 | 7.2 | 28 | 38 | 47 | — |
 
-**Critical difference from Azure:** The Huawei combined test set contains demand spikes up to 3,657 — which is 5.0× the training P99 (729). Azure's test maximum is only 1.6× its training P99. This out-of-distribution spike magnitude explains why Huawei extreme SLA (0.93–0.96) is lower than Azure (0.98–0.997) despite similar cold-start reductions. See `docs/phase5/generalization_study.md` for analysis.
+**Critical difference from Azure:** The Huawei combined test set contains demand spikes up to 3,657 — which is 5.0× the training P99 (729). Azure's test maximum is only 1.10× its training P99. This out-of-distribution spike magnitude explains why Huawei extreme SLA (0.93–0.96) is lower than Azure (0.98–0.997) despite similar cold-start reductions. See `docs/phase5/generalization_study.md` for analysis.
 
-**Regional scale variation:** R3 is a tiny function (max=39 invocations/min); R1 dominates (mean=157.5). R4 and R2 show notably high P99/P90 ratios, indicating heavier tails and confirmed by their high GPD shape parameters ξ (R2: +0.41/+0.50, R4: +0.44/+0.55 for Reactive/TCN).
+**Regional scale variation:** R3 is a tiny function (max=39 invocations/min); R1 dominates (mean=157.5). R4 and R2 show notably high P99/P90 ratios, indicating heavier tails and confirmed by their high GPD shape parameters ξ for TCN (R2: +0.50, R4: +0.54; Reactive ξ is +0.41 on R2 but −0.17 on R4).
 
 These statistics are used for:
 - **P99** → extreme event threshold (frozen from training, applied to test)

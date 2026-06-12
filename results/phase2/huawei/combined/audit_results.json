@@ -2,7 +2,7 @@
   "total_checks": 121,
   "passed": 121,
   "failed": 0,
-  "pass_rate": 1.0,
+  "overall": "PASS",
   "expected_failures_noted": 0,
   "unexpected_failures": 0,
   "known_failures_reference": "On Azure Phase 2, RiskAware(Forecast_Only) and RiskAware(Seasonal_Naive) failed 'buffer larger during extremes' because their base predictions track the seasonal cycle (lag_1440), causing residuals to be smaller during demand spikes (which are partially captured by the seasonal component). These are marked XFAIL and documented, not suppressed.",

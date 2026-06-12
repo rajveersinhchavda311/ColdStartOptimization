@@ -144,7 +144,7 @@ The critical insight is the **base prediction identity check**: since EVT parame
 
 ## Actual Results
 
-All 30 runs (17 unique configs × 2 models) produced request SLA in the range **0.9978–0.9999**, all well above the 0.99 minimum requirement. The three findings below describe the structure of that variation.
+All 30 runs (15 unique configs × 2 models) produced request SLA in the range **0.9978–0.99995**, all well above the 0.99 minimum requirement. The three findings below describe the structure of that variation.
 
 ---
 
@@ -177,7 +177,7 @@ Larger W improves SLA at negligible cost penalty.
 | Reactive | **30** | **446.6M** | **0.9997** |
 | Reactive | 60 | 446.8M | 0.9999 |
 
-TCN cost rises only 25M (7%) from W=10 to W=60, while SLA improves by 0.06 pp (0.9993 → 0.9999). On this dataset, **W=60 strictly dominates W=30** — same cost band, better SLA. The anchor W=30 is defensible (chosen before Phase 3), but the paper can note that W=60 is a Pareto improvement on Azure.
+TCN cost rises only 25M (8%) from W=10 to W=60, while SLA improves by 0.06 pp (0.9993 → 0.9999). On this dataset, **W=60 improves SLA over W=30 at a small cost premium** (+0.05% Reactive, +1.2% TCN). The anchor W=30 is defensible (chosen before Phase 3), and the paper can note that W=60 buys additional SLA cheaply on Azure — but it is not a strict Pareto improvement, since cost rises slightly.
 
 ---
 
@@ -203,7 +203,7 @@ TCN SLA is **identical at 0.9997** across all three threshold values. Cost sprea
 | Parameter | Effect on cost | Effect on SLA | Design implication |
 |-----------|--------------|--------------|-------------------|
 | α | **Strong (~30%)** | **Moderate (0.08 pp)** | Operational lever; choose by cost/SLA priority |
-| W | Weak (<10%) | Mild (+0.06 pp) | Larger is better; W=60 weakly dominates on Azure |
+| W | Weak (<10%) | Mild (+0.06 pp) | Larger is better on Azure: more SLA for ≤1.2% extra cost |
 | threshold | Weak (<5%) | Negligible | P90 is fine; P85–P95 are interchangeable |
 
 ### Phase 3B: Interaction effects confirmed absent
@@ -224,7 +224,7 @@ The 2×2×2 factorial (8 boundary configs) produced approximately parallel inter
    - `interaction_plots.png`: nearly parallel lines = no interaction.
 
 3. **Anchor validity** (tertiary): "The Phase 2 anchor values were not cherry-picked; a wide neighbourhood of settings produces qualitatively identical conclusions."
-   - The range of SLA/cost variation across all 17 unique configs provides the evidence.
+   - The range of SLA/cost variation across all 15 unique configs provides the evidence.
 
 4. **Buffer dynamics preserved**: "The dynamic buffer structure (CV > 0.01) is preserved for all tested hyperparameter values."
    - `buffer_sensitivity.png` confirms the buffer remains non-constant across all configs.

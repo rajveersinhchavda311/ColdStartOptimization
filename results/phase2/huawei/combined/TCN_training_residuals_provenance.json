@@ -1,0 +1,24 @@
+{
+  "description": "Standardized TCN training residuals (z = eps / sigma_train), recomputed via the exact Phase 2 code path (seed=42) for tail_heaviness_comparison.png. Additive artifact; no original Phase 2 file was modified.",
+  "n": 25920,
+  "recomputed": {
+    "sigma_train": 66.95417840107179,
+    "xi": 0.27797895635231057,
+    "cvar_z": 5.460408720100608
+  },
+  "stored_phase2": {
+    "sigma_train": 66.95417840107179,
+    "xi": 0.27797895635231057,
+    "cvar_z": 5.460408720100608
+  },
+  "gate_deltas": {
+    "sigma_rel": 0.0,
+    "xi_abs": 0.0,
+    "cvar_abs": 0.0
+  },
+  "gate_tolerances": {
+    "sigma_rtol": 0.005,
+    "xi_atol": 0.01,
+    "cvar_atol": 0.05
+  }
+}

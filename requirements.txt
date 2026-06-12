@@ -1,0 +1,15 @@
+# Pinned environment used to generate all results in results/ (Python 3.11.6).
+#
+# Reproducibility notes:
+# - scipy is pinned because GPD parameters (xi, beta) come from
+#   scipy.stats.genpareto.fit MLE, whose optimizer behavior can vary
+#   across scipy versions. All stored EVT parameters were produced
+#   under scipy 1.15.2.
+# - torch is pinned because TCN results depend on seeded weight
+#   initialization and cudnn-deterministic training (seed=42, CPU build).
+numpy==2.1.3
+pandas==2.3.2
+scipy==1.15.2
+scikit-learn==1.6.1
+torch==2.9.1
+matplotlib==3.10.1

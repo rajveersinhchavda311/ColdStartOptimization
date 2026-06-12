@@ -183,6 +183,9 @@ Seasonal Naive (lag_1440) should, in principle, be beaten by any model that also
 ### D6: Linear Seasonal as ARIMA Proxy
 Linear Seasonal (OLS on lag_1 + lag_1440) is functionally equivalent to a restricted ARIMA(1,0,0)(1,0,0)[1440] model. Implementing full ARIMA/SARIMA would add substantial complexity (stationarity tests, hyperparameter search) with minimal additional insight over this interpretable linear baseline.
 
+### D7: TCN as the Representative Deep Sequence Model (why no LSTM/Transformer)
+The contribution under test is the EVT-CVaR buffer, not the forecaster: the wrapper is forecaster-agnostic and consumes only a base model's residuals. One deep sequence model is therefore sufficient to demonstrate the framework on a learned forecaster, and the TCN was chosen as that representative: causal dilated convolutions match or exceed recurrent architectures on sequence modeling benchmarks (Bai, Kolter & Koltun, 2018) while training deterministically and quickly on short lag windows. The 10-lag input makes long-range attention (Transformers) unmotivated, and Phase 2's consistency across five heterogeneous base models — from a zero-parameter rule to the TCN — is the evidence that the buffer's value does not depend on forecaster choice.
+
 ---
 
 ## Phase 1 Results (Azure, Test Set)

@@ -41,9 +41,9 @@ Phase 5 applies the EVT-CVaR provisioning methodology — developed and frozen o
 | Train / Val / Test | 11,232 / 3,744 / 3,744 | 25,920 / 8,640 / 8,640 |
 | Demand mean (train) | 613,900 | 261 |
 | Demand P99 (train) | 785,458 | 729 |
-| Test max / Train P99 | 1.6× | **5.0×** |
+| Test max / Train P99 | 1.10× | **5.0×** |
 
-The test/train extremity ratio is the critical difference: Huawei's test period contains spikes 5× the training P99, while Azure's test period stays within 1.6× the training P99. This directly causes lower extreme SLA on Huawei.
+The test/train extremity ratio is the critical difference: Huawei's test period contains spikes 5× the training P99, while Azure's test period stays within 1.10× the training P99. This directly causes lower extreme SLA on Huawei.
 
 ---
 
@@ -114,13 +114,13 @@ All five CVaR_z values exceed K_GAUSSIAN (2.6652) by 1.43× to 2.05×. EVT recom
 
 | Model | Dataset | ξ | CVaR_z | CVaR_z / K_G |
 |-------|---------|---|--------|--------------|
-| RiskAware(Reactive) | Azure          | −0.0928 | 4.161 | 1.56× |
+| RiskAware(Reactive) | Azure          | −0.0928 | 4.160 | 1.56× |
 | RiskAware(Reactive) | Huawei Comb.   | −0.0723 | 3.804 | 1.43× |
 | RiskAware(TCN)      | Azure          | +0.0222 | 4.295 | 1.61× |
 | RiskAware(TCN)      | Huawei Comb.   | +0.2780 | 5.460 | 2.05× |
 
 **Reactive**: ξ is negative on both datasets (bounded tail); ratio consistent (1.43× vs 1.56×).
-**TCN**: ξ turns more positive on Huawei (+0.028 → +0.278); ratio increases from 1.61× to 2.05×. Huawei TCN residuals are heavier-tailed than Azure TCN residuals.
+**TCN**: ξ turns more positive on Huawei (+0.022 → +0.278); ratio increases from 1.61× to 2.05×. Huawei TCN residuals are heavier-tailed than Azure TCN residuals.
 
 ### Table 3: Cross-Dataset ξ Summary (Reactive and TCN)
 
@@ -131,14 +131,14 @@ Full table also saved at `results/phase5/evt_xi_summary.csv`.
 | Azure          | −0.0928 | +0.0222 | 1.56× | 1.61× |
 | Huawei Combined| −0.0723 | +0.2780 | 1.43× | 2.05× |
 | Huawei R1      | +0.0026 | +0.3580 | 1.29× | 2.30× |
-| Huawei R2      | +0.4107 | +0.5013 | 1.99× | 2.47× |
+| Huawei R2      | +0.4107 | +0.5013 | 1.98× | 2.47× |
 | Huawei R3      | −0.2095 | +0.1538 | 1.16× | 1.63× |
 | Huawei R4      | −0.1736 | +0.5446 | 1.73× | 2.95× |
-| Huawei R5      | −0.2289 | +0.0148 | 1.07× | 1.35× |
+| Huawei R5      | −0.2288 | +0.0148 | 1.07× | 1.35× |
 
-**Pattern:** TCN ξ > Reactive ξ in every single dataset (6/6 consistent). TCN residuals are systematically heavier-tailed than Reactive residuals across both platforms. CVaR_z/K_G > 1 for all 14 (model, dataset) pairs — EVT recommends a larger buffer than Gaussian everywhere.
+**Pattern:** TCN ξ > Reactive ξ in every single dataset (7/7 consistent: Azure + Huawei combined + 5 regions). TCN residuals are systematically heavier-tailed than Reactive residuals across both platforms. CVaR_z/K_G > 1 for all 14 (model, dataset) pairs — EVT recommends a larger buffer than Gaussian everywhere.
 
-**High-ξ note (R2, R4):** R2/TCN (ξ=0.501), R2/Forecast_Only (ξ=0.627), R4/TCN (ξ=0.545) have ξ > 0.5, which implies the GPD has infinite variance (though finite CVaR since ξ < 1). R2 and R4 are small-traffic functions (mean 46 and 32 respectively) with occasional large spikes. The EVT fit is still valid but should be interpreted cautiously for these regions.
+**High-ξ note (R2, R4):** R2/TCN (ξ=0.501), R2/Forecast_Only (ξ=0.627), R4/TCN (ξ=0.545) have ξ > 0.5, which implies the GPD has infinite variance (though finite CVaR since ξ < 1). R2 and R4 are small-traffic functions (mean 46 and 32 respectively) with occasional large spikes. The EVT fit is still valid but should be interpreted cautiously for these regions. Parametric bootstrap 95% CIs (B=2000, conditional on the P90 threshold; `results/analysis/evt_bootstrap_ci.csv`) quantify the uncertainty: R2/Forecast_Only ξ ∈ [0.56, 0.69] (infinite variance across the entire CI), R4/TCN ξ ∈ [0.49, 0.61] and R2/TCN ξ ∈ [0.44, 0.56] (CIs straddle 0.5). Critically, **CVaR_z > K_GAUSSIAN holds across the full 95% CI for all 35 (model, dataset) fits** — the headline claim does not depend on the ξ point estimates. The tightest case is R5/Reactive: CVaR_z CI [2.81, 2.90], lower bound still above K_GAUSSIAN = 2.665.
 
 ---
 
@@ -148,16 +148,16 @@ Audit: **126/126 PASS**. See `results/phase1/huawei/combined/audit_results.json`
 
 | Model | Cold Starts | Request SLA | Extreme SLA | Total Cost |
 |-------|-------------|-------------|-------------|------------|
-| Reactive        | 495,683 | 0.8014 | 0.3702* | 5.5M |
+| Reactive        | 495,683 | 0.8014 | 0.3750* | 5.5M |
 | Static_P90      | 169,759 | 0.9320 | 0.4711  | 3.1M |
-| Forecast_Only   | 366,463 | 0.8531 | 0.3750  | 4.0M |
+| Forecast_Only   | 366,463 | 0.8531 | 0.3702  | 4.0M |
 | Seasonal_Naive  | 268,035 | 0.8926 | 0.6355  | 2.9M |
 | Linear_Seasonal | 287,825 | 0.8847 | 0.5637  | 3.1M |
 | TCN             | 226,064 | 0.9094 | 0.5895  | 2.5M |
 
 *Extreme SLA = 1 − (Σ cold_starts at extreme events) / (Σ demand at extreme events). 151 extreme events in test set (demand > P99_train = 729).*
 
-Phase 1 SLA is notably lower than Azure (Azure Reactive: 0.9848). This is expected: Huawei demand is more volatile relative to its mean (std/mean = 0.50 vs 0.21 for Azure), making pure lag-1 prediction less reliable.
+Phase 1 SLA is notably lower than Azure (Azure Reactive: 0.9848). This is expected: Huawei demand is more volatile relative to its mean (std/mean = 0.50 vs 0.11 for Azure), making pure lag-1 prediction less reliable.
 
 ---
 
@@ -200,9 +200,9 @@ Huawei extreme SLA (0.93–0.96) is substantially below Azure (0.99–0.997). Th
 
 The test set contains demand spikes that are categorically larger than anything observed during training. The EVT buffer is calibrated on training residuals at α=0.99 — it provides correct tail protection for events within the training tail regime, but cannot account for test spikes that are multiples above the training maximum. This is an honest limitation: the method cannot extrapolate arbitrarily far into the tail.
 
-On Azure, by contrast, test max = 1,258,768 (1.6× training P99 of 785,458), meaning the test distribution stays within the training tail regime and EVT provides strong protection (extreme SLA ≥ 0.993).
+On Azure, by contrast, test max = 866,343 (1.10× training P99 of 785,458), meaning the test distribution stays well within the training tail regime and EVT provides strong protection (extreme SLA ≥ 0.993).
 
-**Paper framing:** "On Azure, where the test distribution stays within the training tail regime (test max = 1.6× P99), EVT provides near-complete extreme-event protection (SLA ≥ 0.993). On Huawei, the test period contains demand spikes up to 5× the training P99. EVT still reduces extreme cold starts by 95–99%, but extreme SLA (0.93–0.96) reflects the presence of out-of-training-distribution spikes that no calibration method can fully anticipate."
+**Paper framing:** "On Azure, where the test distribution stays well within the training tail regime (test max = 1.10× P99), EVT provides near-complete extreme-event protection (SLA ≥ 0.993). On Huawei, the test period contains demand spikes up to 5× the training P99. EVT still reduces cold starts during extreme events by 83–93% (and overall cold starts by 95–99%), but extreme SLA (0.93–0.96) reflects the presence of out-of-training-distribution spikes that no calibration method can fully anticipate."
 
 ### Expected failures: Huawei vs Azure
 
@@ -244,7 +244,7 @@ Checks include: lag_1440 non-null in all splits, chronological splits (train Jan
 
 All Phase 2 checks pass including "Buffer larger during extremes" for all 5 models. This differs from Azure Phase 2 which had 2 expected failures for this check (Forecast_Only and Seasonal_Naive). On Huawei, the high volatility of demand spikes causes residuals to scale up sharply during extreme events for all models, so the dynamic buffer correctly adapts.
 
-**Audit format note:** The Huawei audit JSONs use `pass_rate` instead of `overall: PASS/FAIL` (different from Phase 1–4 Azure audits). Both report 0 failures. The format difference is a script inconsistency, not a validity issue.
+Both Huawei audit JSONs report `"overall": "PASS"` with 0 failures, in the same format as the Phase 1–4 Azure audits.
 
 ---
 
@@ -254,7 +254,7 @@ All Phase 2 checks pass including "Buffer larger during extremes" for all 5 mode
 
 2. **31-day window:** Huawei data covers a single month. Seasonal patterns beyond weekly are not captured. Both Azure and Huawei are limited to ~2–4 weeks of test data.
 
-3. **High-ξ regions:** R2/Forecast_Only (ξ=0.627), R2/TCN (ξ=0.501), R4/TCN (ξ=0.545) have ξ > 0.5, implying infinite GPD variance (though CVaR remains finite since ξ < 1). These regions are small-traffic (mean 32–46 invocations) with occasional large relative spikes. EVT fits are valid but noisier.
+3. **High-ξ regions:** R2/Forecast_Only (ξ=0.627), R2/TCN (ξ=0.501), R4/TCN (ξ=0.545) have ξ > 0.5, implying infinite GPD variance (though CVaR remains finite since ξ < 1). These regions are small-traffic (mean 32–46 invocations) with occasional large relative spikes. EVT fits are valid but noisier — bootstrap 95% CIs on ξ for these fits span roughly ±0.06 (see the High-ξ note above) — and conclusions for these regions rest on CVaR_z > K_GAUSSIAN, which holds across the full CI, not on the ξ point estimates.
 
 4. **Regions are not independent:** R1–R5 are concurrent traces from the same 31-day period. They share time-of-day drivers. The combined series is their exact sum.
 

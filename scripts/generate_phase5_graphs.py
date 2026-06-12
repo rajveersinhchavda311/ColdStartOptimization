@@ -42,6 +42,13 @@ HW_COMBINED_P2_MET = os.path.join(PROJECT_ROOT, "results", "phase2", "huawei", "
 AZURE_TRAIN   = os.path.join(PROJECT_ROOT, "data", "processed", "azure",   "train.csv")
 HW_TRAIN      = os.path.join(PROJECT_ROOT, "data", "processed", "huawei",  "combined", "train.csv")
 
+# Real standardized TCN training residuals, cached by scripts/cache_tcn_residuals.py
+# (gate-verified against the stored Phase 2 sigma_train / xi / CVaR_z).
+AZURE_TCN_Z = os.path.join(PROJECT_ROOT, "results", "phase2", "azure",
+                           "TCN_training_residuals_z.npy")
+HW_TCN_Z    = os.path.join(PROJECT_ROOT, "results", "phase2", "huawei", "combined",
+                           "TCN_training_residuals_z.npy")
+
 REGIONS = ["R1", "R2", "R3", "R4", "R5"]
 
 ALPHA      = 0.99
@@ -69,31 +76,6 @@ plt.rcParams.update({
 def load_json(path):
     with open(path) as f:
         return json.load(f)
-
-
-def get_training_residuals(train_csv: str, model_class, model_name: str,
-                           val_csv: str = None):
-    """Fit a base model and return standardized training residuals."""
-    train = pd.read_csv(train_csv, parse_dates=["timestamp"])
-    val   = None
-    if val_csv:
-        val = pd.read_csv(val_csv, parse_dates=["timestamp"])
-
-    if model_class.__name__ == "TCNModel":
-        model_class().fit(train, val_df=val)
-        # TCN is slow — skip residual recomputation for graphs
-        # use stored EVT threshold instead; return None to signal skip
-        return None
-
-    model = model_class()
-    model.fit(train)
-    preds   = model.predict(train)
-    actual  = train["concurrency"].values.astype(np.float64)
-    resids  = actual - preds
-    sigma   = float(np.std(resids))
-    if sigma < 1e-8:
-        return None
-    return resids / sigma
 
 
 # ---------------------------------------------------------------------------
@@ -150,12 +132,17 @@ def fig1_tail_heaviness():
             }[model_name]
 
             if base_cls == TCNModel:
-                # Use stored EVT threshold percentile to create mock z data
-                # We'll just show the empirical distribution from the EVT params
-                # Generate representative data for illustration
-                n_total = ep["n_total"]
-                rng = np.random.default_rng(seed=42)
-                z_plot = rng.standard_normal(1000)
+                # Load the real standardized TCN training residuals cached by
+                # scripts/cache_tcn_residuals.py (gate-verified against the
+                # stored Phase 2 sigma_train / xi / CVaR_z before saving).
+                cache_path = HW_TCN_Z if ds_name == "Huawei Combined" else AZURE_TCN_Z
+                if not os.path.exists(cache_path):
+                    raise FileNotFoundError(
+                        f"Missing cached TCN residuals: {cache_path}. "
+                        f"Run scripts/cache_tcn_residuals.py first — this figure "
+                        f"must not be generated with synthetic stand-in data."
+                    )
+                z_plot = np.load(cache_path)
             else:
                 model = base_cls()
                 model.fit(train)

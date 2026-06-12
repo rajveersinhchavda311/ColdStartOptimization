@@ -41,7 +41,7 @@ ColdStartOptimization/
 │   ├── run_audit.py               # Phase 1: audit (74/74)
 │   ├── generate_phase1_graphs.py  # Phase 1: visualizations
 │   ├── run_phase2.py              # Phase 2: risk-aware models (Azure)
-│   ├── run_phase2_audit.py        # Phase 2: audit (104/106, 2 XFAIL)
+│   ├── run_phase2_audit.py        # Phase 2: audit (106/106 PASS, 2 XFAIL)
 │   ├── generate_phase2_graphs.py  # Phase 2: visualizations
 │   ├── run_phase3.py              # Phase 3: sensitivity analysis (30 configs)
 │   ├── audit_phase3.py            # Phase 3: audit (148/148)
@@ -53,16 +53,22 @@ ColdStartOptimization/
 │   ├── audit_phase1_huawei.py     # Phase 5: Phase 1 audit (Huawei)
 │   ├── run_phase2_huawei.py       # Phase 5: Phase 2 risk-aware on Huawei
 │   ├── audit_phase2_huawei.py     # Phase 5: Phase 2 audit (Huawei)
-│   └── generate_phase5_graphs.py  # Phase 5: visualizations
+│   ├── generate_phase5_graphs.py  # Phase 5: visualizations
+│   ├── cache_tcn_residuals.py     # Caches real TCN training residuals (gate-verified) for figures
+│   ├── cost_ratio_sensitivity.py  # Re-weights frozen results under 5:1/10:1/20:1 cost ratios
+│   └── evt_bootstrap_ci.py        # Parametric bootstrap 95% CIs for GPD xi / CVaR_z
 │
 ├── results/
-│   ├── phase1/azure/              # Phase 1 Azure metrics, diagnostics, audit
-│   ├── phase2/azure/              # Phase 2 Azure metrics, EVT params, audit
+│   ├── phase1/
+│   │   ├── azure/                 # Phase 1 Azure metrics, diagnostics, audit
+│   │   └── huawei/combined/       # Phase 5: Phase 1 baselines on Huawei
+│   ├── phase2/
+│   │   ├── azure/                 # Phase 2 Azure metrics, EVT params, audit
+│   │   └── huawei/                # Phase 5: combined/ + R1..R5/ EVT params
 │   ├── phase3/azure/              # Phase 3 sensitivity configs + audit
 │   ├── phase4/azure/              # Phase 4 ablation conditions + audit
-│   └── phase5/                    # Phase 5 Huawei results
-│       ├── phase1/huawei/combined/
-│       └── phase2/huawei/combined/
+│   ├── phase5/                    # Cross-dataset ξ summary (evt_xi_summary.csv)
+│   └── analysis/                  # Cost-ratio sensitivity + EVT bootstrap CIs
 │
 ├── graphs/
 │   ├── preprocessing/             # Time series, histograms (Azure + Huawei regions)
@@ -87,7 +93,7 @@ ColdStartOptimization/
 
 This project investigates whether risk-aware provisioning can reduce serverless cold starts without excessive overprovisioning. It proceeds in five phases:
 
-**Phase 1** establishes forecasting baselines evaluated by a deterministic provisioning simulator. Six models span the complexity spectrum from a zero-parameter rule to a trained deep learning model. Best result: TCN, request SLA = 0.9859, extreme SLA = 0.9436.
+**Phase 1** establishes forecasting baselines evaluated by a deterministic provisioning simulator. Six models span the complexity spectrum from a zero-parameter rule to a trained deep learning model. Best wrappable forecaster: TCN (request SLA = 0.9859, extreme SLA = 0.9436, cost 371.4M). Static_P90 attains a higher request SLA (0.9925) at similar cost, but has the worst extreme SLA (0.8650) and — predicting a constant — produces no forecast-error distribution to risk-wrap in Phase 2.
 
 **Phase 2** wraps each Phase 1 model with a dynamic EVT-CVaR safety buffer. The buffer scales with local forecast volatility, shrinking during calm periods and expanding during uncertain ones. Cold starts fall 88–98%. Best result: RiskAware(TCN), request SLA = 0.9997, extreme SLA = 0.9944, cost 342M.
 
@@ -157,13 +163,13 @@ Where:
 | RiskAware(Linear_Seasonal) | 0.9997 | 0.9951 | 365.6M | −98.2% |
 | **RiskAware(TCN)** | **0.9997** | **0.9944** | **342.4M** | **−97.8%** |
 
-Phase 2 audit: **104/106** (2 expected failures — see `docs/phase2/verification.md`).
+Phase 2 audit: **106/106 PASS (2 XFAIL)** — two expected failures are documented and counted as passed; see `docs/phase2/verification.md`.
 
 **EVT vs Gaussian gap (Azure):**
 
 | Model | CVaR_z (EVT) | K_GAUSSIAN (α=0.99) | Ratio |
 |-------|-------------|---------------------|-------|
-| RiskAware(Reactive) | 4.161 | 2.665 | 1.56× |
+| RiskAware(Reactive) | 4.160 | 2.665 | 1.56× |
 | RiskAware(TCN) | 4.295 | 2.665 | 1.61× |
 
 The Gaussian assumption at the same confidence level would under-buffer by 33–61%.
@@ -175,7 +181,7 @@ The Gaussian assumption at the same confidence level would under-buffer by 33–
 **Design:** 9 one-at-a-time configs (α: 0.95/0.975/0.99; W: 10/30/60; threshold: P85/P90/P95) plus 8 full-factorial boundary configs (2×2×2). Total: 30 unique runs on Reactive and TCN.
 
 **Findings:**
-- All 30 configs: request SLA ∈ [0.9978, 0.9999] — all above 0.99 baseline
+- All 30 configs: request SLA ∈ [0.9978, 0.99995] — all above 0.99 baseline
 - **α is the primary lever:** α=0.95 → cost 239M, SLA 0.9989 (TCN); α=0.99 → cost 342M, SLA 0.9997 (30% cost difference for 0.08pp SLA relaxation)
 - **W is near-inert on cost, weakly positive on SLA** (W=60 weakly dominates W=30)
 - **Threshold is nearly inert:** SLA = 0.9997 at P85, P90, and P95 for TCN
@@ -209,7 +215,7 @@ Phase 3 audit: **148/148 PASS**.
 **Key findings:**
 1. **C0→C1 (+1.33–1.44pp) is the dominant effect** — adding any calibrated buffer closes ~94% of cold starts
 2. **EVT vs Gaussian:** extreme SLA improves from 0.987–0.993 (C1/C2) to 0.998–0.9999 (C3/C4) — an order of magnitude closer to perfect
-3. **Dynamic σ = cost efficiency:** C3→C4 saves 5–6% cost at only 0.02–0.03pp SLA decrease
+3. **Dynamic σ = cost efficiency:** C3→C4 saves 4–6% cost at only 0.02–0.03pp SLA decrease
 4. **C3 (Static+EVT) is the max-SLA corner; C4 (Phase 2) is the cost-optimal choice**
 
 Phase 4 audit: **63/63 PASS**.
@@ -232,11 +238,20 @@ Phase 4 audit: **63/63 PASS**.
 
 **EVT generalizes:** CVaR_z / K_GAUSSIAN > 1.0 in all 14 (model, dataset) combinations across 7 datasets. TCN ξ > Reactive ξ in all 7 datasets.
 
-**Extreme SLA gap:** Huawei extreme SLA (0.93–0.96) is lower than Azure (0.98–0.997) because Huawei test-set spikes reach 5× training P99 (vs 1.6× on Azure) — out-of-distribution demand EVT cannot anticipate.
+**Extreme SLA gap:** Huawei extreme SLA (0.93–0.96) is lower than Azure (0.98–0.997) because Huawei test-set spikes reach 5× training P99 (vs 1.10× on Azure) — out-of-distribution demand EVT cannot anticipate.
 
 Phase 5 audits: **126/126 PASS (Phase 1), 121/121 PASS (Phase 2)**.
 
 ## Setup and Usage
+
+```bash
+pip install -r requirements.txt               # pinned environment (Python 3.11)
+```
+
+> **Reproducibility note:** All stored results were generated under the pinned versions in
+> `requirements.txt`. The GPD shape/scale parameters depend on `scipy.stats.genpareto.fit`
+> (MLE), so a different scipy version may yield slightly different ξ values; TCN training is
+> seeded (seed=42, cudnn-deterministic) and reproduces exactly on the same torch build.
 
 ```bash
 # --- Phase 1: Forecasting Baselines (Azure) ---
@@ -248,7 +263,7 @@ python scripts/generate_phase1_graphs.py
 
 # --- Phase 2: Risk-Aware EVT-CVaR (Azure) ---
 python scripts/run_phase2.py
-python scripts/run_phase2_audit.py             # 104/106 (2 XFAIL)
+python scripts/run_phase2_audit.py             # 106/106 PASS (2 XFAIL)
 python scripts/generate_phase2_graphs.py
 
 # --- Phase 3: Sensitivity Analysis ---
@@ -285,11 +300,12 @@ python scripts/generate_phase5_graphs.py
 |----------|-------------|
 | `docs/paper_context.md` | **Master paper-writing context** — all numbers, figures, narrative arc, terminology |
 | `docs/repository_structure.md` | Complete project structure guide |
+| `docs/pre_paper_cleanup.md` | Changelog for all pre-paper cleanup changes and audit fixes (June 2026) |
 | `docs/preprocessing/preprocessing_guide.md` | Data processing, feature engineering, split methodology |
 | `docs/phase1/architecture.md` | Phase 1 model and evaluation architecture |
 | `docs/phase1/verification.md` | Phase 1 audit results (74/74) |
 | `docs/phase2/architecture.md` | Phase 2 EVT-CVaR architecture and math |
-| `docs/phase2/verification.md` | Phase 2 audit results (104/106, 2 XFAIL documented) |
+| `docs/phase2/verification.md` | Phase 2 audit results (106/106 PASS, 2 XFAIL documented) |
 | `docs/phase3/sensitivity_analysis.md` | Phase 3 design, results, and robustness findings |
 | `docs/phase4/ablation_study.md` | Phase 4 ablation design, results, and paper narrative |
 | `docs/phase5/generalization_study.md` | Phase 5 Huawei results, EVT parameters, cross-dataset analysis |

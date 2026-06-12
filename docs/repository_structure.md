@@ -72,7 +72,7 @@ All forecasting models implement the `BaseModel` interface from `base.py`.
 | `forecast_only.py` | `ForecastOnlyModel` | `mean(lag_1..lag_10)` — moving average |
 | `seasonal_naive.py` | `SeasonalNaiveModel` | `lag_1440` — same clock minute yesterday |
 | `linear_seasonal.py` | `LinearSeasonalModel` | OLS on `[lag_1, lag_1440]` |
-| `tcn.py` | `TCNModel` | Causal dilated 1D conv, depth=6, kernel=2, ~22K params. Target normalization. lag_1440 as scalar side-channel. seed=42. |
+| `tcn.py` | `TCNModel` | Causal dilated 1D conv: 4 residual blocks (8 conv layers), kernel=3, dilations [1,2,4,8], ~22K params. Target normalization. lag_1440 as scalar side-channel. seed=42. |
 | `risk_aware.py` | `RiskAwareModel` | Wraps any BaseModel. Adds `sigma_t × CVaR_z` buffer. EVT fitting via `evaluation/evt.py`. |
 
 `RiskAwareModel` constructor takes `(base_model, alpha, window, threshold_pct)`. Default anchor: α=0.99, W=30, threshold=P90.
@@ -137,7 +137,15 @@ One script per experiment or audit. All are self-contained entry points.
 | `audit_phase1_huawei.py` | Huawei Phase 1 audit. Saves `audit_results.json` with `"overall": "PASS"/"FAIL"` |
 | `run_phase2_huawei.py` | Phase 2 risk-aware on Huawei combined. Parameters unchanged from Azure. |
 | `audit_phase2_huawei.py` | Huawei Phase 2 audit. Saves `audit_results.json` with `"overall": "PASS"/"FAIL"` |
-| `generate_phase5_graphs.py` | All Phase 5 figures → `graphs/phase5/` |
+| `generate_phase5_graphs.py` | All Phase 5 figures → `graphs/phase5/`. TCN panels of the tail-heaviness figure require the residual cache below. |
+
+### Supporting analyses (additive; never modify existing results)
+
+| Script | What it does |
+|--------|-------------|
+| `cache_tcn_residuals.py` | Retrains the TCN through the exact Phase 2 code path (seed=42) and caches standardized training residuals as `results/phase2/{azure,huawei/combined}/TCN_training_residuals_z.npy`. Refuses to save unless recomputed σ_train/ξ/CVaR_z match the stored Phase 2 values (provenance sidecar records the deltas). |
+| `cost_ratio_sensitivity.py` | Exact re-weighting of frozen per-timestep cold/idle outcomes under cold:idle ∈ {5:1, 10:1, 20:1} → `results/analysis/cost_ratio_sensitivity.csv`. Self-checks that 10:1 reproduces all stored totals. |
+| `evt_bootstrap_ci.py` | Parametric bootstrap (B=2000, seed=42) 95% CIs for GPD ξ and CVaR_z for all 35 (model, dataset) fits → `results/analysis/evt_bootstrap_ci.csv`. |
 
 ---
 
@@ -229,7 +237,7 @@ All documentation. Start with `paper_context.md` for paper writing.
 | `phase1/architecture.md` | Phase 1 model descriptions, simulator design, evaluation framework |
 | `phase1/verification.md` | Phase 1 audit checks and results (74/74) |
 | `phase2/architecture.md` | RiskAwareModel: EVT-CVaR math, buffer formula, leakage-free sequential construction |
-| `phase2/verification.md` | Phase 2 audit results (104/106), expected failure analysis |
+| `phase2/verification.md` | Phase 2 audit results (106/106 PASS, 2 XFAIL), expected failure analysis |
 | `phase3/sensitivity_analysis.md` | Sensitivity study design, all 30 configs, key findings (α primary lever, W near-inert) |
 | `phase4/ablation_study.md` | Ablation 2×2 design, K_GAUSSIAN derivation, full results table, paper narrative |
 | `phase5/generalization_study.md` | Huawei methodology, EVT parameters across all 7 datasets, cross-dataset ξ table, extreme SLA gap explanation |
